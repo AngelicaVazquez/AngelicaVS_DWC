@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Repaso1</title>
+    </head>
+    
+    <body>
+
+        <h3>Archivo de entrada:</h3>
+        <input type="file" id="file-input" /><!-- carga del archivo entrada0.txt -->
+        <h3>Entrada:</h3>
+        <pre id="entrada"></pre>
+        <h3>Salida:</h3>
+        <pre id="salida"></pre>
+
+        <script>
+
+            var entradaTexto = new Array(); /* array para almecenar las lineas de entrada archivo */
+
+            function leerArchivo(e) {
+                // esta funcion lee un archivo de texto local y lo deja en la variable contenido
+                var archivo = e.target.files[0];
+                if (!archivo) {	return;	}
+                var lector = new FileReader(); 		// objeto para leer el fichero
+                lector.onload = function(e) { 		// callback con el evento de carga del archivo
+                var contenido = e.target.result;
+                mostrarContenido(contenido);
+                leerResultado(lector.result);	
+                };
+                lector.readAsText(archivo);
+            }
+
+            function leerResultado(a){	
+                // leer la entrada y procesar
+                entradaTexto=a.split('\n');
+                for (i = 0; i < entradaTexto.length; i++) { 
+
+                    var obj = {cat: entradaTexto[0],cant: entradaTexto[1]};
+                   
+                    entradaTexto.push(obj);
+                   // console.log(Object.values(obj));
+                   
+
+                }
+               
+
+                function mostrarContenido(contenido) {
+                // usar el dom para mostrar el contenido
+                i=0;
+                    do{
+                        d1=entradaTexto[i];
+                        d2=entradaTexto[i+1];
+                        document.write(d1+","+d2+"<br/>");
+                        i+=2;
+                    } while(d1!='E')
+                for (i = 0; i < entradaTexto.length; i++) { 
+                
+                /*var elemento = console.log(Object.values(entradaTexto[i]));;//document.getElementById('entrada');
+                elemento.innerHTML = contenido;;*/
+                }
+
+                }
+                	
+            }
+
+
+
+                var miArray = [];
+                miArray[0]  = { id: 1, nombre: "RAFAEL PEREZ", edad: 23, activo: true };
+                miArray[1]  = { id: 2, nombre: "MARTA MARRERO", edad: 32, activo: false };
+                document.write( "id: " + miArray[1].id + "<br />" );
+                document.write( "nombre: " + miArray[1].nombre + "<br />" );
+                document.write( "edad: " + miArray[1].edad + "<br />" );
+                document.write( "activo: " + miArray[1].activo + "<br />" );
+
+
+
+
+
+
+
+
+
+            document.getElementById('file-input').addEventListener('change', leerArchivo, false); // añadir evento para llamar a la funcion leerArchivo
+
+        </script>
+    </body>
+</html>
