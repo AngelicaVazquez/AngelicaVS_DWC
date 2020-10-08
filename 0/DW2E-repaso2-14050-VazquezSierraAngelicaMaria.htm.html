@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>ejercicio-C-madrid-2011</title>
+
+</head>
+ 
+<body>
+
+<input type="file" id="file-input" />
+
+<script type="text/javascript">
+
+var datosEntrada = []; // global 
+
+function leerArchivo(e) {
+	var archivo = e.target.files[0];
+	if (!archivo) {	return;	}
+	var lector = new FileReader(); 		
+	lector.onload = function(e) { 		
+	var contenido = e.target.result;
+	leerResultado(lector.result);	
+	};
+	lector.readAsText(archivo);
+}
+
+function leerResultado(a){	
+	var entradaTexto = []; 
+	entradaTexto=a.split('\r\n');
+	console.log('ARRAY=',entradaTexto);
+	for (i = 0; i < entradaTexto.length; i++) { 
+		var linea=entradaTexto[i].split(',');
+		console.log(linea);
+		for (j = 0; j < linea.length; j++) { 
+			datosEntrada.push(linea[j]);
+			console.log(i,j,linea[j]);
+		}   
+	}		
+	procesar();	
+}
+
+document.getElementById('file-input').addEventListener('change', leerArchivo, false);
+
+function procesar(){
+
+    document.write('<b>Entrada</b><br/>');
+
+    for (i = 0; i < datosEntrada.length; i++) { 
+        document.write(datosEntrada[i]+"<br/>");
+    }
+
+    document.write('<b>Salida</b><br/>');
+
+    for (i = 0; i < datosEntrada.length; i++) {
+        d1=datosEntrada[i];
+        var ceros='0000000000000';
+        if (d1.length<8){
+		d1=ceros.substr(0,8-d1.length)+d1;
+        }else if (d1.length<13 && d1.length>8){
+            d1=ceros.substr(0,13-d1.length)+d1;
+        }	
+        datosEntrada[i]=d1;
+    }
+    
+    arrayInvertido=[];
+    for (i = 0; i < datosEntrada.length; i++) {
+       
+        d1= datosEntrada[i].split("");
+        d1= d1.reverse();
+        d1= d1.join("");
+        arrayInvertido.push(d1);
+    }
+    for (i = 0; i < arrayInvertido.length; i++) { 
+        document.write(arrayInvertido[i]+"<br/>");
+    }
+
+
+}
+</script>	
+
+</body>
+</html>
