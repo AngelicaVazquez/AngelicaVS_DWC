@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>paginaMenus</title>
+    <script>
+        function iniciar(){
+        var menu1=creaNodo('div');
+        var menu2=creaNodo('div');
+        var menu3=creaNodo('div');
+        
+
+        // propiedades del div
+        menu1.id='menu1';
+        menu1.innerHTML='menu 1';
+        menu1.style.width='100px';
+        menu1.style.height='2em';
+        menu1.style.border='1px solid #000';
+        menu1.style.display='inline-block';
+        menu1.style.margin='5px';
+        menu1.addEventListener('click',clickCaja);
+
+        menu2.id='menu2';
+        menu2.innerHTML='menu 2';
+        menu2.style.width='100px';
+        menu2.style.height='2em';
+        menu2.style.border='1px solid #000';
+        menu2.style.display='inline-block';
+        menu2.style.margin='5px';
+        menu2.addEventListener('click',clickCaja);
+
+        menu3.id='menu3';
+        menu3.innerHTML='menu 3';
+        menu3.style.width='100px';
+        menu3.style.height='2em';
+        menu3.style.border='1px solid #000';
+        menu3.style.display='inline-block';
+        menu3.style.margin='5px';
+        menu3.addEventListener('click',clickCaja);
+        }
+
+        function creaNodo(tipo){
+        var elemento=document.createElement(tipo); // crear nodo
+        document.body.appendChild(elemento);	// posicionarlo en el DOM. Document es el nodo raiz de la página siempre
+        return elemento;	// lo retornamos para trabajar con el
+        }
+
+        function clickCaja(){
+        //En este caso "this" es "div" que es quien ha llamado al evento
+        var titulo=creaNodo('h1');
+        var texto=creaNodo('p');
+        texto.innerHTML='Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sagittis vitae sapien id fermentum. Ut eget tortor sem. Phasellus nec fermentum enim. Maecenas id nisi nec velit facilisis semper. Nulla feugiat diam et turpis laoreet blandit. Pellentesque non tortor tincidunt, pharetra sapien ac, accumsan magna. Aenean ultrices metus nec imperdiet vestibulum. In nec aliquam leo. ';
+        document.this.appendChild(texto);
+        }
+
+     window.onload = iniciar;
+    </script>
+</head>
+<body>
+</body>
+</html>
