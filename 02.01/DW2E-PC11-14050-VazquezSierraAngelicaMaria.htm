@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>paginaMenus</title>
+    <script>
+
+        function iniciar(){
+
+            var nombre=elem('p');
+
+            nombre.id='nombre';
+            nombre.innerHTML='Angélica Mª Vázquez Sierra';
+            nombre.style.height='2em';
+            nombre.style.margin='5px';
+
+
+            var dias = ['lunes','martes','miercoles','jueves','viernes','sabado','domingo'];
+
+            for (i = 0; i < dias.length; i++){
+                i=elem('p');
+                i.innerHTML=i;
+            }
+
+        }
+
+        function elem(tipo){
+        var elemento=document.createElement(tipo);
+        document.body.appendChild(elemento);
+        return elemento;
+        }
+
+        window.onload = iniciar;
+    </script>
+</head>
+<body>
+</body>
+</html>
