@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>LISTAS 3</title>
+    <script>
+        const nNum=10;
+        const nMax=1000;
+        var lista=[];
+
+        var cajas = 64;
+
+        function mostrar(){
+
+            var aux=0;
+
+            for(i = 1; i <= cajas; i++){
+                
+                var elemento = crearCaja('div',i);
+                elemento.style.height=setAltura();
+            
+                if(aux==8){
+                    aux=0;
+                    elemento.style.clear='left';
+                }
+                aux++;
+            }
+        }
+
+     /*   function iniciar(){
+            var res='<h2>ejemplos de metodos de array</h2>';
+            res+='lista: '+genera4()+'<br/>';
+            document.write(res);
+        }*/
+
+        
+        function aleatorio(a,b) {
+	return Math.round(Math.random()*(b-a)+parseInt(a));
+}
+
+        function setAltura(){
+
+
+
+            var altura = aleatorio(0, 3);
+            var alt="";
+            if(altura=1){
+                alt=10
+            }else if(altura=2){
+                alt=70
+            }else{
+                alt=50
+            }
+            return alt+"px";
+        }
+
+        function crearCaja(tipo, num){
+            var caja=document.createElement(tipo);
+            caja.style.float = 'left';
+            caja.id='caja'+num;
+            caja.style.margin='0px';
+            caja.style.border='1px solid #000';
+            caja.style.width='50px';
+            document.body.appendChild(caja);
+            return caja;
+        }
+
+        window.onload = mostrar;
+    </script>
+</head>
+<body>
+</body>
+</html>
