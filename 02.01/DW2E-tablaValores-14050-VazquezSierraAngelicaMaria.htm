@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Tabla de Valores</title>
+
+<script>
+
+    document.write("<b>EJEMPLO</b> de tabla de valores<br><br>1) Texto csv:<br>x#cos(x)#sen(x)#sen(x)#14 decimales#x con decimales<br>");
+
+    for (i = 0; i < 12; i = i + 0.6) {
+        document.write(i.toFixed(2)+"#"+Math.cos(i).toFixed(2)+"#"+Math.sin(i).toFixed(2)+"#"+Math.sin(i)+"#"+i.toFixed(14)+"#"+i+"<br>");
+    }
+
+    document.write("2) tabla de valores en tabla:<br>")
+
+    var table = document.createElement('table');
+        for (i = 0; i < 12; i = i + 0.6){
+        var th = document.createElement("th");
+        var tr = document.createElement("tr");
+        
+        var thTXT1 = document.createTextNode("x");
+        var thTXT2 = document.createTextNode("cos(x)");
+        var thTXT3 = document.createTextNode("sen(x)");
+        var thTXT4 = document.createTextNode("sen(x)");
+        var thTXT5 = document.createTextNode("14 decimales");
+        var thTXT6 = document.createTextNode("x con decimales");
+
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        var td4 = document.createElement("td");
+        var td5 = document.createElement("td");
+        var td6 = document.createElement("td");
+
+        var text1 = document.createTextNode('Text1');
+        var text2 = document.createTextNode('Text2');
+
+        th.appendChild(thTXT1);
+        th.appendChild(thTXT2);
+        th.appendChild(thTXT3);
+        th.appendChild(thTXT4);
+        th.appendChild(thTXT5);
+        th.appendChild(thTXT6);
+
+        td1.appendChild(text1);
+        td2.appendChild(text2);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+
+        table.appendChild(tr);
+}
+document.body.appendChild(table);
+
+
+
+</script>
+
+</head>
+ 
+<body>
+</body>
+</html>
