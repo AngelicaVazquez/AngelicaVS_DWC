@@ -1,0 +1,13 @@
+try catch
+em
+al hacer click en otra caja
+txt area resize none cols 4 rows 1 id heigh 1.2em
+div mensajes de salida: algunos elementos no son enteros. faltan X por rellenar
+
+menú
+niveles: continentesA, paisesB, ciudadesC
+meter toda la info en un arrasy de datos
+pulsa para seleccionar
+camino de migas
+mostrar menus de continentes
+subir al anterior nivel o clickar en home
