@@ -3,98 +3,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Enteros</title>
-    <script>
-
-        for(var i = 0; i < 4; i++){
-            caja = document.createElement('textarea');
-            caja.rows="4";
-            document.body.append(caja);
+     <style>
+        input{
+            float: left;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-
-        document.getElementById("caja1").addEventListener("onkeydown", enteros(parseInt(this.value)));
-        document.getElementById("caja2").addEventListener("onclick", enteros);
-        document.getElementById("caja3").addEventListener("onclick", enteros);
-        document.getElementById("caja4").addEventListener("onclick", enteros);
-
-        function enteros(num1){
-
-            var msjE, msjS;
-
-            msjE = document.getElementById("error");
-            msjE.innerHTML("");
-            msjS = document.getElementById("sugerencia");
-            msjS.innerHTML("");
-
-*/
-
-            //num1 = parseInt(this.value);
-            /*num2 = parseInt(document.getElementById("caja2").value);
-            num3 = parseInt(document.getElementById("caja3").value);
-            num4 = parseInt(document.getElementById("caja4").value);*/
-/*
-            try {
-                if(num1 == "")  throw "el primer campo está vacío"
-                if(typeof num1 != "number") throw "el primer campo no tiene un valor numérico"*/
-/*
-                if(num2 == "")  throw "el segundo campo está vacío";
-                if(typeof num2 != "number") throw "el segundo campo no tiene un valor numérico";
-
-                if(num3 == "")  throw "el tercer campo está vacío";
-                if(typeof num3 != "number") throw "el tercer campo no tiene un valor numérico";
-
-                if(num4 == "")  throw "el cuarto campo está vacío";
-                if(typeof num4 != "number") throw "el cuarto campo no tiene un valor numérico";*/
-       /*     } catch (err) {
-                msjE.innerHTML = "Corrija el siguiente error, por favor: "+ err +"<br>";
-            }
-        }
-        
-        
-        
-         <input type="text" id="caja1" maxlength="4" height="1.2em" autofocus required>
+    </style>
+</head>
+<body>
+    <input type="text" id="caja1" maxlength="4" height="1.2em" autofocus required>
     <input type="text" id="caja2" maxlength="4" height="1.2em" required>
     <input type="text" id="caja3" maxlength="4" height="1.2em" required>
     <input type="text" id="caja4" maxlength="4" height="1.2em" required>
@@ -102,25 +18,48 @@
         <p id="error"></p>
         <p id="sugerencia"></p>
     </div>
-    
-     <style>
-        input{
-            float: left;
-        }
-    </style>*/
-    
 
-    </script>
-
-</head>
-<body>
     <script>
-              for(var i = 0; i < 4; i++){
-            caja = document.createElement('textarea');
-            caja.rows="4";
-            document.body.append(caja);
+
+        document.getElementById("caja1").addEventListener("onblur", enteros);
+        document.getElementById("caja2").addEventListener("onblur", enteros);
+        document.getElementById("caja3").addEventListener("onblur", enteros);
+        document.getElementById("caja4").addEventListener("onblur", enteros);
+
+        function enteros(){
+
+           // var msjE, msjS;
+            var num1 = parseInt(this.value);
+            
+
+           msjE = document.getElementById("error");
+          /*  msjE.innerHTML("");
+            msjS = document.getElementById("sugerencia");
+            msjS.innerHTML("");*/
+
+
+
+         /*   num1 = parseInt(this.value);
+            num2 = parseInt(document.getElementById("caja2").value);
+            num3 = parseInt(document.getElementById("caja3").value);
+            num4 = parseInt(document.getElementById("caja4").value);*/
+
+            try {
+                if(num1 == "")  throw "el primer campo está vacío";
+                if(typeof num1 != "number") throw "el primer campo no tiene un valor numérico";
+
+               /* if(num2 == "")  throw "el segundo campo está vacío";
+                if(typeof num2 != "number") throw "el segundo campo no tiene un valor numérico";
+
+                if(num3 == "")  throw "el tercer campo está vacío";
+                if(typeof num3 != "number") throw "el tercer campo no tiene un valor numérico";
+
+                if(num4 == "")  throw "el cuarto campo está vacío";
+                if(typeof num4 != "number") throw "el cuarto campo no tiene un valor numérico";*/
+           } catch (err) {
+            msjE.innerHTML = "Corrija el siguiente error, por favor: "+ err +"<br>";
+            }
         }
-  
-    </script>
+    </script> 
 </body>
 </html>
