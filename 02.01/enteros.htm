@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+
+<script>
+/*
+
+Haremos un pagina de entrada de datos.
+- Añade N elementos textarea a tu página. N puede valer entre 2 y 20
+En este orden chequea:
+- Si todos estan rellenos y son enteros muestra los numeros ordenados ascendente y descendente
+- Si todas las cajas estan rellenas pero alguna no tiene un entero muestra 'hay entradas que no son enteros' 
+- Si alguna esta vacia 'faltan X por rellenar complete'
+- Si alguna entrada no es un número entero muestra 'alguna no es entero'
+- Si todos estan vacios, solicita al usuario 'rellene con numeros enteros'
+lenguaje:[], push, for..of, filter, sort, parseInt, join, isNaN, =>, textarea , pre
+Puedes rehacer el ejercicio con tus propios chequeos y mensajes.
+
+*/
+var N=4; // entre 2 y 20 , numero de cajas
+
+function iniciar(){
+	for (k=0;k<N;k++){
+		crearCaja('caja'+k,'');	
+	}
+	crearNodoSalida('avisos','');
+	chequeos();		
+}
+function crearNodoSalida(id,inner){
+	// con pre podemos usar salto de linea \n
+	var ele=document.createElement('pre');
+	ele.id=id;
+	ele.innerHTML=inner;
+	document.body.appendChild(ele);
+}
+function crearCaja(id,inner){
+	var ele=document.createElement('textarea');
+	ele.id=id;
+	ele.innerHTML=inner;
+	ele.cols=4;
+	ele.maxLength=ele.cols;
+	ele.rows=1;
+	ele.style.resize='none';
+	ele.style.height='1.2em';
+	ele.addEventListener('change',changeCaja);
+	document.body.appendChild(ele);
+}
+function chequeos(){
+	var eles=document.getElementsByTagName('textarea');
+	var valores=[];
+	for (ele of eles){
+		valores.push(ele.value);
+	}
+	var avisos=document.getElementById('avisos');
+	var vacios=valores.filter(function(v){return v==''}).length;
+/*  otra forma de contar vacios:var vacios=0;valores.forEach(function(v){if(v==''){vacios++;}}); */
+	console.log('vacios:',vacios);
+	var txt=''; // salida del programa en forma de texto
+	
+	if (vacios==valores.length){
+		// todos vacios
+		txt+='rellena con enteros';
+	}else if(vacios>0){
+		// alguno vacio
+		if(!todosEnteros(valores)){
+			txt+='\nalguno no es entero';
+		}
+		txt+='\nfaltan '+vacios+' por rellenar complete';
+	}else{
+		// todos rellenos
+		if (todosEnteros(valores)){
+			// si todos son enteros calcular
+			var ordenados1=[];
+			var ordenados2=[];
+			for (j=0;j<valores.length;j++){ordenados1[j]=parseInt(valores[j]);}
+			for (j=0;j<valores.length;j++){ordenados2[j]=parseInt(valores[j]);}			
+			ordenados1.sort(function(a,b){return a-b});
+			ordenados2.sort((a,b)=>b-a);			
+			txt+='ordenado descendente: '+ordenados2.join(' ');
+			txt+='\nordenado ascendente: '+ordenados1.join(' ');			
+			/*otra forma: txt.replace(/,/g,' ') */
+		}else{
+			txt='hay entradas que no son enteros';
+		}
+	}
+	avisos.innerHTML=txt;
+}
+function todosEnteros(lista){
+	console.log('lista:',lista);
+	for (k=0;k<lista.length;k++){
+		console.log('k:',k,lista[k]);
+		if (lista[k]!=parseInt(lista[k])){return false;}
+	}
+	return true;
+}
+function changeCaja(){
+	chequeos();
+}
+window.onload = iniciar; // sin parentesis , al final del head
+</script>
+
+</head>
+ 
+<body>
+</body>
+
+</html>

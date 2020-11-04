@@ -5,28 +5,23 @@
 <title>paginaBasica</title>
 
 <script>
-//Declaramos y creamos funciones
 function iniciar(){
-	console.log('paso por iniciar');
-	//"document" es el documento que se carga en el navegador. También tenemos "window"	
-	var ele=document.getElementById('caja1'); // cargar en ele el objeto. Dame el elemento por su ID
-	ele.style.backgroundColor='aqua'; // modificar las propiedades. Como en CSS, hay que coger el objeto y usar el método "style"
+	console.log('paso por iniciar');	
+	var ele=document.getElementById('caja1'); // cargar en ele el objeto
+	ele.style.backgroundColor='aqua'; // modificar las propiedades
 	ele.style.width='100px';
 	ele.style.height='100px';
 	ele.style.border='1px solid #000'; // poner borde a la caja
-	ele.colorin='red'; // añadimos una propiedad nueva al elemento. Estamos creando el atributo "colorin" y guardando en él un texto que dice 'red'
-	ele.addEventListener('click',clickCaja); // añadir un evento elemento.evento=manejador. Otra forma de llamar al evento. Este evento se queda en espera al cargar la página. "click" ya existe
+	ele.colorin='red'; // añadimos una propiedad nueva al elemento
+	ele.addEventListener('click',clickCaja); // añadir un evento elemento.evento=manejador
 }
 function clickCaja(){
-	//En este caso "this" es "div" que es quien ha llamado al evento
 	this.style.backgroundColor=this.colorin;// this el objeto que origino la llamada
 	this.style.border='none'; // quitar el borde a la caja
 	}
 </script>
 
 <script>
-//Estamos declarando (preparando) el evento, por eso no tiene paréntesis. Si los tuviera, estaríamos ejecutándola.
-//Cuando sobre "window" se ejecuta "onload", salta el evento
 // evento semantico : sin parentesis , al final del head
 // salto a iniciar() al cargar a pagina
 window.onload = iniciar; 

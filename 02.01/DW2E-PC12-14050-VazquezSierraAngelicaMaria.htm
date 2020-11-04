@@ -2,46 +2,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>tablero4</title>
+    <title>Prueba 2.1</title>
     <script>
-
-        var cajas = 64;
+        var cajas = 0;
+        var multiploDe = 8;
 
         function mostrar(){
 
-            var aux=0;
-
-            for(i = 1; i <= cajas; i++){
-                
-                var elemento = crearCaja('div',i);
-               
-                if(aux==8){
-                    aux=0;
-                    elemento.style.clear='left';
-                }
-                aux++;
-		    }
+                var elemento = crearCaja('div',cajas);
         }
 
         function crearCaja(tipo, num){
             var randomColor = Math.floor(Math.random()*16777215).toString(16);
             var caja=document.createElement(tipo);
             caja.style.float = 'left';
-            caja.id='caja'+num;
-            caja.style.margin='0px';
+            num++
+            caja.id='c'+("0" + num).slice(-2);
+            caja.innerHTML=caja.id;
+            caja.style.margin='2px';
             caja.style.border='1px solid #000';
             caja.style.height='50px';
             caja.style.width='50px';
             caja.style.backgroundColor='#'+randomColor;
             caja.addEventListener('click',clickCaja);
             document.body.appendChild(caja);
+            if(cajas%multiploDe==0){
+                caja.style.clear='left';
+                }
+            cajas++
             return caja;
         }
 
-       function clickCaja(){
-
-            this.style.backgroundColor='white';
-
+        function clickCaja(){
+            if(cajas==32){
+                window.alert("-COMPLETO-")
+            }else{
+            crearCaja('div', cajas);
+            }
         }
         window.onload = mostrar;
     </script>

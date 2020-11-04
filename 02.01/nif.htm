@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Calculo de la letra del DNI</title>
+<script type="text/javascript">
+
+/*
+Crear un programa para calcular la letra del nif
+- pedir datos por pantall acon prompt: numeros y letra
+- chequear numero entre 0 y 99999999
+- mostrar con alert si coinciden
+*/
+
+var letras = ['T','R','W','A','G','M','Y','F','P', 'D','X','B','N','J','Z','S','Q','V','H','L','C','K','E','T'];
+var numero = prompt("Introduce tu número de DNI (sin la letra)");
+var letra = prompt("Introduce la letra de tu DNI (en mayúsculas)");
+letra = letra.toUpperCase();
+console.log(numero,letra); 
+/*
+
+aqui puedes añadir tus chequeos
+
+*/
+var error=false;
+if(numero < 0 || numero > 99999999) error=true;
+console.log('>>> ',numero,error);
+
+if (error) {
+  alert("El número proporcionado no es válido");
+}
+else {
+  var letraCalculada = letras[numero % 23];
+  if(letraCalculada != letra) {
+    alert("La letra o el número proporcionados no son correctos"); // salida por pantalla
+  }
+  else {
+    alert("El número de DNI y su letra son correctos");
+  }
+}
+ 
+</script>
+</head>
+ 
+<body>
+<p>Esta página calculó con popups (una práctica no aconsejada) la letra del NIF</p>
+</body>
+</html>

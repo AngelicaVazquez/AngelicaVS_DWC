@@ -14,11 +14,9 @@ function iniciar(){
 	ele.style.width='100px';
 	ele.style.height='50px';	
 }
-
-//entre paréntesis porque te devuelve "tipo"
 function creaNodo(tipo){
 	var ele=document.createElement(tipo); // crear nodo
-	document.body.appendChild(ele);	// posicionarlo en el DOM. Document es el nodo raiz de la página siempre
+	document.body.appendChild(ele);	// posicionarlo en el DOM 
 	return ele;	// lo retornamos para trabajar con el
 }
 window.onload = iniciar; // sin parentesis , al final del head
