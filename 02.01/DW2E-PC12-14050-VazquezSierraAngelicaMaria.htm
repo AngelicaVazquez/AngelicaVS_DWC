@@ -17,12 +17,14 @@
             var caja=document.createElement(tipo);
             caja.style.float = 'left';
             num++
-            caja.id='c'+("0" + num).slice(-2);
+            caja.id='c'+"<b>"+("0" + num).slice(-2)+"<b>";
             caja.innerHTML=caja.id;
             caja.style.margin='2px';
             caja.style.border='1px solid #000';
-            caja.style.height='50px';
-            caja.style.width='50px';
+            caja.style.height='60px';
+            caja.style.width='60px';
+            caja.style.fontSize='20px';
+            caja.style.textAlign='center';
             caja.style.backgroundColor='#'+randomColor;
             caja.addEventListener('click',clickCaja);
             document.body.appendChild(caja);
