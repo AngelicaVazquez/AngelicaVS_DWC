@@ -2,19 +2,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" crossorigin="anonymous">
     <title>videos</title>
     <style>
+
+
+        #principal {
+            display: flex;
+            width: 80%;
+            flex-direction: column;
+            position: absolute;
+            left: 9%;
+            top: 5%;
+        }
+
+        #ordenacion {
+            display: flex;
+            height: 40px;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        #ordenacion .pure-button {
+            width: 20%;
+        }
+
         #contenedor {
             display: flex;
-            width: 100px;
-            height: 500px;
             flex-wrap: nowrap;
+            justify-content: space-between;
+            overflow-x: scroll;
+            overflow-y: hidden;
         }
 
         #contenedor > div {
-            width: 50px;
-            height: 50px;
+            width: 300px;
+            height: 250px;
+            text-align: center;
+            margin: 5px;
+            margin-bottom: 50px;
+            box-shadow: 0px 5px 12px #888888;
         }
+
+        #contenedor > div > img {
+            height: 100px;
+            width: 150px;
+        }
+
     </style>
 
     <script>
@@ -31,19 +65,84 @@
             html(){
                 var img = "<img src=https://i.ytimg.com/vi/"+this.imagen+"/mqdefault.jpg></img>";
                 var ele = document.createElement("div");
-                ele.id="1";
                 var tit = this.titulo;
                 ele.innerHTML="<H5>"+tit+"</H5><br>"+img;
                 document.getElementById("contenedor").append(ele);
+                //propiedad display none?
             }
         }
 
         function cargar(){
+            var principal = document.createElement("div");
+            principal.id="principal";
+            var ordenacion = document.createElement("div");
+            ordenacion.id="ordenacion";
             var contenedor = document.createElement("div");
             contenedor.id="contenedor";
-            document.body.appendChild(contenedor);
-            var unVideo = new Video(9,"La llegada",9,9,9,"uWs5lsWXLbo");
-            unVideo.html();
+            document.body.appendChild(principal);
+            document.getElementById("principal").appendChild(ordenacion);
+            document.getElementById("principal").appendChild(contenedor);
+            var video1 = new Video(9,"Arrival",9,9,9,"uWs5lsWXLbo");
+            var video2 = new Video(9,"Gravity",9,9,9,"VptHhljW3Ls");
+            var video3 = new Video(9,"Interestellar",9,9,9,"qPBRz8LcWn0");
+            var video4 = new Video(9,"First Man",9,9,9,"N1YVcih9dHA");
+            var video5 = new Video(9,"Moon",9,9,9,"OAnTQMP6BUU");
+            var video6 = new Video(9,"The Martian",9,9,9,"OS23SmNlE3Y");
+            var video7 = new Video(9,"Jurassic World",9,9,9,"YGUHJvo9Qd0");
+            var video8 = new Video(9,"Godzilla",9,9,9,"yPTgUSeE8Tc");
+            var video9 = new Video(9,"Transformers",9,9,9,"aKo6V_HAG9Q");
+            var video10 = new Video(9,"Pacific Rim",9,9,9,"qLg524GEzGY");
+            var video11 = new Video(9,"Dragon ball Super Broly",9,9,9,"6ndGdHTNa_U");
+            var video12 = new Video(9,"Coco",9,9,9,"DZgQofCkTbA");
+            var video13 = new Video(9,"Frankenweenie",9,9,9,"_5VIfqittbo");
+            var video14 = new Video(9,"Monster House",9,9,9,"SSpy-4CBvjA");
+            var video15 = new Video(9,"Up",9,9,9,"JttMI7BevNk");
+            var video16 = new Video(9,"The Maze Runner",9,9,9,"MHnF0yAlHoQ");
+            var video17 = new Video(9,"The Host",9,9,9,"QVjihByxxUI");
+            var video18 = new Video(9,"X-Men",9,9,9,"T5vs1Bwkhrw");
+            var video19 = new Video(9,"Fantastic Four",9,9,9,"aif0T0yk9gk");
+            var video20 = new Video(9,"Green Lantern",9,9,9,"qA6zwUUj7QE");
+
+            video1.html();
+            video2.html();
+            video3.html();
+            video4.html();
+            video5.html();
+            video6.html();
+            video7.html();
+            video8.html();
+            video9.html();
+            video10.html();
+            video11.html();
+            video12.html();
+            video13.html();
+            video14.html();
+            video15.html();
+            video16.html();
+            video17.html();
+            video18.html();
+            video19.html();
+            video20.html();
+
+            var todos = document.createElement("button");
+            document.getElementById("ordenacion").append(todos);
+            todos.className="pure-button";
+            var filtro = document.createElement("button");
+            document.getElementById("ordenacion").append(filtro);
+            filtro.className="pure-button";
+            var fTitulo = document.createElement("button");
+            document.getElementById("ordenacion").append(fTitulo);
+            fTitulo.className="pure-button";
+            var fSubida = document.createElement("button");
+            document.getElementById("ordenacion").append(fSubida);
+            fSubida.className="pure-button";
+            var fVisitas = document.createElement("button");
+            document.getElementById("ordenacion").append(fVisitas);
+            fVisitas.className="pure-button";
+            var fDuracion = document.createElement("button");
+            document.getElementById("ordenacion").append(fDuracion);
+            fDuracion.className="pure-button";
+            
         }
 
         window.onload = cargar;
