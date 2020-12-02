@@ -1,0 +1,9 @@
+caja contenedora, asi las bolas tienen un elemento de referencia(posicionamiento absoluto)
+las bolas tienen display flex center
+window.resize: incluir
+botón con clear-> for x of tiempo
+datos0(c): poner atributos
+var tiempo[]: lista con temporizadores
+hay que hacer delay, el timer tiene q ser más grande q el tiempo de la transición
+para crear las cajas, lo hace con un bucle for y dentro hay una variable "c" q tiene el createelement. también hay un set interval al q se le pasa la funcion, pone una func de tiempo aleatorio comprendido entre un min y un max cuyos valores están en 2 array de min y max Y le pasa param: "c". Hace un push al array tiempo de todo esto.
+a style top : axpx
