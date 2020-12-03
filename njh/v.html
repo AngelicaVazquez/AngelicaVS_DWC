@@ -172,21 +172,21 @@
 //BARRASSSSSSSSSSSSSSSSS MOSTRARRRRRR
     function dibujarGrafico(linea) {
       if (document.getElementById("barras").innerHTML === "") {
-        /*for (num of linea) {
+        for (num of linea) {
           var div = document.createElement('div');
           document.getElementById("barras").appendChild(div);
-        }*/
+        }
         
-        linea.forEach(element => {
+        /*linea.forEach(element => {
           var lineaGrafico = document.createElement('div');
           document.getElementById("barras").appendChild(lineaGrafico);
           lineaGrafico.style.width = element / 99 * 100 + "%";
           console.log(element);
-        });
+        });*/
       }
-      /*for (i=0; i<document.getElementById("barras").childNodes.length; i++) {
+      for (i=0; i<document.getElementById("barras").childNodes.length; i++) {
         document.getElementById("barras").childNodes.item(i).style.width = linea[i] / 99 * 100 + "%";
-      }*/
+      }
     }
     window.onload = cargar;
     </script>
