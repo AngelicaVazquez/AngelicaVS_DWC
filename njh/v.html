@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>videos</title>
+    <style>
+        *{
+        font-family: Arial, Helvetica, sans-serif;
+        color: blue;
+        }
+
+        #contenedor{
+            width: 15vw;
+            height: 25rem;
+            display: flex;
+            flex-direction: column;
+        }
+        #contenedor > *{
+            margin: 0.2rem;
+            border: solid 3px rgb(177, 177, 177);
+        }
+
+        #listas{
+            height: 35%;
+            resize: none;
+        }
+
+        #iniciar{
+            height: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #iniciar:hover{
+            background-color: red;
+            cursor: pointer;
+        }
+
+        #barras{
+            height: 35%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #botones{
+            height: 15%;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+    </style>
+    <script>
+    function cargar() {
+        //Contenedor principal
+        var contenedor = document.createElement('div');
+        contenedor.id = "contenedor";
+        document.body.appendChild(contenedor);
+
+        //Contenedor textarea
+        var listas = document.createElement('textarea');
+        listas.id = "listas";
+        listas.innerHTML="1,1,2,3,4,99\n30,40,50,60,20,30,4\n90,10,80,70,62,99"
+        document.getElementById("contenedor").append(listas);
+
+        //Contenedor botón iniciar
+        var iniciar = document.createElement('div');
+        iniciar.id = "iniciar";
+        iniciar.innerHTML="run";
+        iniciar.addEventListener("click",mostrar)
+        document.getElementById("contenedor").append(iniciar);
+
+        //Contenedor barras
+        var barras = document.createElement('div');
+        barras.id = "barras";
+        document.getElementById("contenedor").append(barras);
+
+        //Contenedor botones
+        var botones = document.createElement('div');
+        botones.id = "botones";
+        document.getElementById("contenedor").append(botones);
+
+
+    }
+
+//BOTONESSSSS
+    function mostrarBotones() {
+      const texto = document.querySelector("textarea").value;
+      const vals = valores(texto);
+      /*if (!vals) {
+        // ha habido errores, no hacer nada
+        return;
+      }*/
+      const botones = document.getElementById("botones");
+      botones.innerHTML = "";
+      for (let i = 0; i < vals.length; i++) {
+        const boton = document.createElement('div');
+        boton.classList.add("centrado", "rojo", "boton");
+        boton.innerHTML = i;
+        boton.addEventListener('click', () => mostrarBarras(vals[i]));
+        botones.appendChild(boton);
+      }
+      document.getElementById("barras").innerHTML = "";
+      botones.childNodes.item(0).click();
+    }
+
+//ERROREEEEEEEESSSSSSSSSSSSSSSSSS LEER DATOS
+    function valores(texto) {
+      const lineas = texto.split("\n").map(linea => linea.split(","));
+      if (lineas.length > 5) {
+        // error2
+        alert("mas de 5 lineas");
+        return false;
+      }
+      const primeraFila = lineas[0];
+      for (let i = 0; i < lineas.length; i++) {
+        const linea = lineas[i];
+        if (linea.length > 6) {
+          // error1
+          alert("mas de 6 campos en linea " + (i + 1));
+          return false;
+        }
+        if (linea.length !== primeraFila.length) {
+          // error3
+          alert("no hay los mismos campos en todas las lineas");
+          return false;
+        }
+        for (let j = 0; j < linea.length; j++) {
+          const num = parseInt(linea[j]);
+          if (!Number.isInteger(num)) {
+            // error4
+            alert("entrada no es entero: " + linea[j]);
+            return false;
+          }
+          if (num < 1 || num > 99) {
+            // error5
+            alert("datos fuera de rango: " + num);
+            return false;
+          }
+          lineas[i][j] = num;
+        }
+      }
+      return lineas;
+    }
+
+//BARRASSSSSSSSSSSSSSSSS MOSTRARRRRRR
+    function mostrarBarras(fila) {
+      const barras = document.getElementById("barras");
+      if (barras.innerHTML === "") {
+        for (const col of fila) {
+          const div = document.createElement('div');
+          div.classList.add("barra");
+          barras.appendChild(div);
+        }
+      }
+      for (let i = 0; i < barras.childNodes.length; i++) {
+        barras.childNodes.item(i).style.width = fila[i] / 99 * 100 + "%";
+      }
+    }
+    window.onload = cargar;
+    </script>
+</head>
+<body>
+</body>
+</html>
