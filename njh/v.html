@@ -41,6 +41,13 @@
             display: flex;
             flex-direction: column;
         }
+        #barras div {
+          flex: 1;
+          border-right: 2px solid gray;
+          background-color: lightgray;
+          margin: 2px;
+          transition: all 0.60s;
+        }
 
         #botones{
             height: 15%;
@@ -59,14 +66,14 @@
         //Contenedor textarea
         var listas = document.createElement('textarea');
         listas.id = "listas";
-        listas.innerHTML="1,1,2,3,4,99\n30,40,50,60,20,30,4\n90,10,80,70,62,99"
+        listas.innerHTML="1,1,2,3,4,99\n30,40,50,60,20,30\n90,10,80,70,62,99"
         document.getElementById("contenedor").append(listas);
 
         //Contenedor botón iniciar
         var iniciar = document.createElement('div');
         iniciar.id = "iniciar";
         iniciar.innerHTML="run";
-        iniciar.addEventListener("click",mostrar)
+        iniciar.addEventListener("click",mostrar);
         document.getElementById("contenedor").append(iniciar);
 
         //Contenedor barras
@@ -82,79 +89,104 @@
 
     }
 
-//BOTONESSSSS
-    function mostrarBotones() {
-      const texto = document.querySelector("textarea").value;
-      const vals = valores(texto);
+    function mostrar() {
+      var entrada = document.getElementById("listas").value;
+      var arrayLineas = leerDatos(entrada);
       /*if (!vals) {
-        // ha habido errores, no hacer nada
+        // ha habido errores, no hacer nada//Probar !arrayLineas.isEmpty
         return;
       }*/
-      const botones = document.getElementById("botones");
-      botones.innerHTML = "";
-      for (let i = 0; i < vals.length; i++) {
-        const boton = document.createElement('div');
-        boton.classList.add("centrado", "rojo", "boton");
+      //Cada vez que se presiona run, se limpia de divs el contendor "botones" para no append repes
+      document.getElementById("botones").innerHTML = "";
+
+      //numBotones=numLineas
+      for (i=0; i<arrayLineas.length; i++) {
+        var boton = document.createElement('div');
         boton.innerHTML = i;
-        boton.addEventListener('click', () => mostrarBarras(vals[i]));
-        botones.appendChild(boton);
+        boton.id = i;
+        boton.addEventListener("click", dibujarGrafico.bind(null, arrayLineas[i]));
+        document.getElementById("botones").appendChild(boton);
+        console.log(arrayLineas[i]);
       }
+
+      //Iniciar su contenido a vacío para guiar a la función q dibuja el gráfico
       document.getElementById("barras").innerHTML = "";
-      botones.childNodes.item(0).click();
+      //Simula un click para mostrar las barritas
+      //document.getElementById("botones").firstChild.click();//revisar
     }
 
-//ERROREEEEEEEESSSSSSSSSSSSSSSSSS LEER DATOS
-    function valores(texto) {
-      const lineas = texto.split("\n").map(linea => linea.split(","));
-      if (lineas.length > 5) {
-        // error2
+    function leerDatos(entrada) {
+
+      //Separar datos
+      var arrayLineas = entrada.split("\n").map(function(linea){
+        return linea.split(",");
+      });//probar arrow
+
+      //Error 2
+      if (arrayLineas.length > 5) {
         alert("mas de 5 lineas");
         return false;
       }
-      const primeraFila = lineas[0];
-      for (let i = 0; i < lineas.length; i++) {
-        const linea = lineas[i];
-        if (linea.length > 6) {
-          // error1
-          alert("mas de 6 campos en linea " + (i + 1));
+
+      //Recorrer todas las lineas
+      var linea1 = arrayLineas[0];//Referencia//Probar debajo de error3, dentro del bucle
+      for (i=0; i<arrayLineas.length; i++) {
+        var linea = arrayLineas[i];
+
+        //Error 1
+        if (linea.length>6) {
+          alert("mas de 6 campos en linea "+(i+1));
           return false;
         }
-        if (linea.length !== primeraFila.length) {
-          // error3
+
+        //Error 3
+        if (linea.length !== linea1.length) {
           alert("no hay los mismos campos en todas las lineas");
           return false;
         }
-        for (let j = 0; j < linea.length; j++) {
-          const num = parseInt(linea[j]);
-          if (!Number.isInteger(num)) {
-            // error4
-            alert("entrada no es entero: " + linea[j]);
+
+        //Recorrer cada linea
+        for (j=0; j<linea.length; j++) {
+          var num = parseInt(linea[j]);
+          var esEntero = new RegExp("^\\d+$");
+
+          //Error 4
+          if (!esEntero.test(num)) {
+            alert("entrada no es entero: "+linea[j]);
             return false;
           }
-          if (num < 1 || num > 99) {
-            // error5
-            alert("datos fuera de rango: " + num);
+
+          //Error 5
+          if (num<1 || num>99) {
+            alert("datos fuera de rango: "+num);
             return false;
           }
-          lineas[i][j] = num;
+          arrayLineas[i][j]=num;
         }
       }
-      return lineas;
+
+      //Todo ha ido bien
+      return arrayLineas;
     }
 
 //BARRASSSSSSSSSSSSSSSSS MOSTRARRRRRR
-    function mostrarBarras(fila) {
-      const barras = document.getElementById("barras");
-      if (barras.innerHTML === "") {
-        for (const col of fila) {
-          const div = document.createElement('div');
-          div.classList.add("barra");
-          barras.appendChild(div);
-        }
+    function dibujarGrafico(linea) {
+      if (document.getElementById("barras").innerHTML === "") {
+        /*for (num of linea) {
+          var div = document.createElement('div');
+          document.getElementById("barras").appendChild(div);
+        }*/
+        
+        linea.forEach(element => {
+          var lineaGrafico = document.createElement('div');
+          document.getElementById("barras").appendChild(lineaGrafico);
+          lineaGrafico.style.width = element / 99 * 100 + "%";
+          console.log(element);
+        });
       }
-      for (let i = 0; i < barras.childNodes.length; i++) {
-        barras.childNodes.item(i).style.width = fila[i] / 99 * 100 + "%";
-      }
+      /*for (i=0; i<document.getElementById("barras").childNodes.length; i++) {
+        document.getElementById("barras").childNodes.item(i).style.width = linea[i] / 99 * 100 + "%";
+      }*/
     }
     window.onload = cargar;
     </script>
