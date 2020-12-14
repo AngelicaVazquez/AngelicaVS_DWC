@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>EJB13</title>
+
+<script>
+var cid=0;
+var lista=[];
+var cadena='\
+antonio;2018-10-01#\
+juan;2018-10-02#\
+maria;2018-10-03#\
+ana;2018-11-01#\
+manuel;2018-11-02#\
+manuela;2018-11-03#\
+marta;2018-12-01#\
+alfonso;2018-12-02#\
+alfonsina;2018-12-03#\
+maria jose;2018-12-04#\
+ana maria;2018-00-02\
+';
+
+function iniciar(){
+		crearLista();
+		pintar();			
+}
+function crearLista(){
+	var lineas=cadena.split('#');
+	for (j=0;j<lineas.length;j++){
+		var b={};
+		var campos=lineas[j].split(';');
+		b.nombre=campos[0];
+		
+		var fecha=new Date(campos[1]);
+		if (fecha!='Invalid Date'){
+			b.fecha=fecha;
+			lista[j]=b;			
+		}else{
+			alert('fecha invalida: '+campos[1]);	
+		}
+	}
+	console.log(lista);
+}
+function ordena3(){
+	lista.sort(function(a,b){return b.fecha.getTime()-a.fecha.getTime()});
+	//console.log(lista);
+}
+function ordena1(){
+	lista.sort(function(a,b){return b.nombre<a.nombre});
+	//console.log(lista);
+}
+function ordena2(){
+	lista.sort(function(a,b){return a.fecha.getTime()-b.fecha.getTime()});
+	//console.log(lista);
+}
+function pintar(){
+	ordena1();
+	crearMenu('C1');
+	ordena2();
+	crearMenu('C2');
+	ordena3();
+	crearMenu('C3');
+}
+function crearMenu(id){
+	var ele=crearContenedor(id);
+	var txt;
+	for (j=0;j<lista.length;j++){
+		txt=lista[j].nombre+'<br/>'+lista[j].fecha.toLocaleDateString();
+		crearDiv('D'+j,txt,ele);
+	}
+}
+function crearContenedor(id){
+	var alto='580px';
+	var ancho='220px';
+	var ele=document.createElement('div'); // crear nodo div
+	document.body.appendChild(ele); // añadir nodo al dom	
+	ele.id=id;
+	ele.style.textAlign='center'; // centrar texto de innerHTML
+	ele.style.float='left'; // posicionamiento
+	ele.style.width=ancho;
+	ele.style.height=alto;
+	ele.style.margin='8px';
+	ele.style.border='1px solid black'; // borde de la caja
+	ele.style.backgroundColor=ponColor();
+	return ele;
+}
+function crearDiv(id,h,anterior){
+	var alto='40px';
+	var ancho='200px';
+	var ele=document.createElement('div'); // crear nodo div
+	anterior.appendChild(ele); // añadir nodo al dom	
+	ele.id=id;
+	ele.innerHTML='<b>'+h+'</b>';
+	ele.style.textAlign='center'; // centrar texto de innerHTML
+	ele.style.float='left'; // posicionamiento
+	ele.style.width=ancho;
+	ele.style.height=alto;
+	ele.style.margin='8px';
+	ele.style.border='1px solid black'; // borde de la caja
+	ele.style.backgroundColor=ponColor();
+}
+function ponColor(){
+	var r=aleatorio(200,255).toString(16).padStart(2,0); 
+	var g=aleatorio(250,255).toString(16).padStart(2,0);
+	var b=aleatorio(200,255).toString(16).padStart(2,0);
+	return  '#'+r+g+b; // color en css
+}
+function aleatorio(a,b) {
+	return Math.round(Math.random()*(b-a)+parseInt(a));
+}
+window.onload = iniciar; // despues de cargar llamara a la funcion
+</script>
+
+</head>
+ 
+<body>
+</body>
+
+</html>
