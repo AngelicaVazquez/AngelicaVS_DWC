@@ -1,87 +1,83 @@
-<<<<<<< Updated upstream
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Drag and drop</title>
-    <style></style>
+    <style>
+        #contenedorBookmarks > div:not(:first-child):not(:last-child):hover {
+            cursor: pointer;
+        }
+
+        #contenedorEtiquetas > div:not(:first-child):not(:last-child):hover {
+            cursor: pointer;
+        }
+    </style>
 	<script>
         //usar la lista como zona de drop para añadir, el ultimo campo [drop] como zona para borrar. por ejemplo
         //funciones para crear los cuadros con sus caracteristicas
-        function iniciar() {
-            //numB = window.prompt("Número de bookmarks");
-            //numE = window.prompt("Número de etiquetas");
 
-            divBookmarks(numB);
-            divEtiquetas(numE);
-
-            var contenedor = document.createElement("div");
-            contenedor.id = contenedor;
-            contenedor.style.display="flex";
-            contenedor.style.width="100%";
-            contenedor.style.height="10rem";
-            contenedor.style.backgroundColor="blue";
-            document.body.appendChild("contenedor");
-
-        }
-
-        function divFiltro() {
-            
-        }
-
-        function divBookmarks(x) {
-            for (let i=0; i < x; i++) {
+        class Bookmark{
+            constructor(titulo,url,descripcion){
+                this.titulo = titulo;
+                this.url = url;
+                this.descripcion = descripcion;
+            }
+            html(y){
+                var ele = document.createElement("div");
+                ele.innerHTML="Bookmark "+y;
+                ele.addEventListener("click", mostrarContenido);
+                document.getElementById("contenedorBookmarks").append(ele);
             }
         }
 
-        function divContenido() {
-
-        }
-
-        function divEtiquetas(x) {
-            for (let i=0; i < x; i++) {
-            }
-        }
-
-        window.onload=iniciar;
-    </script>
-</head>
-<body>
-
-</body>
-</html>
-||||||| constructed merge base
-=======
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Drag and drop</title>
-    <style></style>
-	<script>
-        //usar la lista como zona de drop para añadir, el ultimo campo [drop] como zona para borrar. por ejemplo
-        //funciones para crear los cuadros con sus caracteristicas
         function iniciar() {
-            //numB = window.prompt("Número de bookmarks");
-            //numE = window.prompt("Número de etiquetas");
 
-            divBookmarks(numB);
-            divEtiquetas(numE);
-
+            //Contenedor principal
             var contenedor = document.createElement("div");
             contenedor.id = "contenedor";
             contenedor.style.display="flex";
+            contenedor.style.justifyContent="space-evenly"
             contenedor.style.width="100%";
             contenedor.style.height="10rem";
             contenedor.style.backgroundColor="blue";
             document.body.appendChild(contenedor);
 
+            //Datos de partida
+            numB = window.prompt("Número de bookmarks");
+            numE = window.prompt("Número de etiquetas");
+            divBookmarks(numB);
+            divEtiquetas(numE);
+
+
+
         }
 
-        function divFiltro() {
+        function divFiltro(arrayEtiquetas) {
             
         }
 
         function divBookmarks(x) {
+
+            //Contenedor de los bookmarks
+            var contenedorBookmarks = document.createElement("div");
+            contenedorBookmarks.id = "contenedorBookmarks";
+            contenedorBookmarks.style.display="flex";
+            contenedorBookmarks.style.flexDirection="column";
+            document.getElementById("contenedor").appendChild(contenedorBookmarks);
+
+            //Div del título
+            var title = document.createElement("div");
+            title.innerHTML="BOOKMARKS";
+            document.getElementById("contenedorBookmarks").appendChild(title);
+
+            //Botón añadir
+            var add = document.createElement("div");
+            add.innerHTML="[ + ]";
+            document.getElementById("contenedorBookmarks").appendChild(add);
+
             for (let i=0; i < x; i++) {
+                var book = new Bookmark("B"+i,"url de B"+i,"descripcion de B"+i);
+                book.html(i);
+                console.log(book);
             }
         }
 
@@ -90,9 +86,39 @@
         }
 
         function divEtiquetas(x) {
+
+            //Contenerodr de las etiquetas
+            var contenedorEtiquetas = document.createElement("div");
+            contenedorEtiquetas.id = "contenedorEtiquetas";
+            document.getElementById("contenedor").appendChild(contenedorEtiquetas);
+
+            //Div del título
+            var title = document.createElement("div");
+            title.innerHTML="ETIQUETAS";
+            document.getElementById("contenedorEtiquetas").appendChild(title);
+
+            //Botón añadir
+            var add = document.createElement("div");
+            add.innerHTML="[ + ]";
+            document.getElementById("contenedorEtiquetas").appendChild(add);
+
             for (let i=0; i < x; i++) {
+                var elem = document.createElement("div");
+                elem.innerHTML="Etiqueta " + i;
+                document.getElementById("contenedorEtiquetas").appendChild(elem);
             }
         }
+
+        //Cuando se hace click en un bookmark
+        function mostrarContenido() {
+
+        }
+
+        //Cuando se hace click en añadir
+        function addBookmark() {
+
+        }
+
 
         window.onload=iniciar;
     </script>
@@ -101,4 +127,3 @@
 
 </body>
 </html>
->>>>>>> Stashed changes
