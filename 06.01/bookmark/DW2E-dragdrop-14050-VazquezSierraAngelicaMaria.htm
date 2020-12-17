@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Drag and drop</title>
+    <style></style>
+	<script>
+        //usar la lista como zona de drop para añadir, el ultimo campo [drop] como zona para borrar. por ejemplo
+        //funciones para crear los cuadros con sus caracteristicas
+        function iniciar() {
+            //numB = window.prompt("Número de bookmarks");
+            //numE = window.prompt("Número de etiquetas");
+
+            divBookmarks(numB);
+            divEtiquetas(numE);
+
+            var contenedor = document.createElement("div");
+            contenedor.id = contenedor;
+            contenedor.style.display="flex";
+            contenedor.style.width="100%";
+            contenedor.style.height="10rem";
+            contenedor.style.backgroundColor="blue";
+            document.body.appendChild("contenedor");
+
+        }
+
+        function divFiltro() {
+            
+        }
+
+        function divBookmarks(x) {
+            for (let i=0; i < x; i++) {
+            }
+        }
+
+        function divContenido() {
+
+        }
+
+        function divEtiquetas(x) {
+            for (let i=0; i < x; i++) {
+            }
+        }
+
+        window.onload=iniciar;
+    </script>
+</head>
+<body>
+
+</body>
+</html>
