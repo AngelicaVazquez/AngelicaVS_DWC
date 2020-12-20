@@ -3,6 +3,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Drag and drop</title>
     <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        div {
+            border: 1px black solid;
+            border-radius: 5px;
+            text-align: center;
+            padding: 2px;
+        }
         #contenedorBookmarks > div:not(:first-child):not(:last-child):hover {
             cursor: pointer;
         }
@@ -23,8 +33,9 @@
             }
             html(y){
                 var ele = document.createElement("div");
-                ele.innerHTML="Bookmark "+y;
-                ele.addEventListener("click", mostrarContenido);
+                ele.innerHTML="bookmark "+y;
+                var t = this;
+                ele.addEventListener("click", mostrarContenido(t));
                 document.getElementById("contenedorBookmarks").append(ele);
             }
         }
@@ -37,8 +48,6 @@
             contenedor.style.display="flex";
             contenedor.style.justifyContent="space-evenly"
             contenedor.style.width="100%";
-            contenedor.style.height="10rem";
-            contenedor.style.backgroundColor="blue";
             document.body.appendChild(contenedor);
 
             //Datos de partida
@@ -68,6 +77,40 @@
             var title = document.createElement("div");
             title.innerHTML="BOOKMARKS";
             document.getElementById("contenedorBookmarks").appendChild(title);
+            
+            //Div del contenido
+            var contenedorContenido = document.createElement("div");
+            contenedorContenido.id = "contenedorContenido";
+            document.getElementById("contenedor").appendChild(contenedorContenido);
+
+            //Formulario
+            var form = document.createElement("form");
+            form.id = "form";
+            form.setAttribute('method',"post");
+            form.setAttribute('action',"submit.php");
+            //Título
+            var i = document.createElement("input");
+            i.setAttribute('type',"text");
+            i.setAttribute('name',"titulo");
+            //URL
+            var i2 = document.createElement("input");
+            i2.setAttribute('type',"text");
+            i2.setAttribute('name',"url");
+            //Descripción
+            var i3 = document.createElement("input");
+            i3.setAttribute('type',"text");
+            i3.setAttribute('name',"descripcion");
+
+            var s = document.createElement("input");
+            s.setAttribute('type',"submit");
+            s.setAttribute('value',"Guardar");
+
+            form.appendChild(i);
+            form.appendChild(i2);
+            form.appendChild(i3);
+            form.appendChild(s);
+
+            document.getElementById("contenedorContenido").appendChild(form);
 
             //Botón añadir
             var add = document.createElement("div");
@@ -81,8 +124,13 @@
             }
         }
 
-        function divContenido() {
-
+        function divContenido(t,u,d) {
+            //const returnedTarget = Object.assign(target, source);
+            //document.getElementById("contenedorContenido").cloneNode(contenidoBook);
+            
+            document.getElementById("form").elements["titulo"].text = t;
+            document.getElementById("form").elements["url"].value = u;
+            document.getElementById("form").elements["descripcion"].value = d;
         }
 
         function divEtiquetas(x) {
@@ -104,14 +152,23 @@
 
             for (let i=0; i < x; i++) {
                 var elem = document.createElement("div");
-                elem.innerHTML="Etiqueta " + i;
+                elem.innerHTML="etiqueta " + i;
                 document.getElementById("contenedorEtiquetas").appendChild(elem);
             }
         }
 
         //Cuando se hace click en un bookmark
-        function mostrarContenido() {
-
+        function mostrarContenido(o) {
+            //document.getElementById("contenedorContenido").appendChild(this);
+            document.getElementById("form").reset();
+            t = o.titulo;
+            u = o.url;
+            d = o.descripcion;
+            divContenido(t,u,d);
+            //console.log(o);
+        }
+        function clearfield() {
+            document.getElementById("form").reset();
         }
 
         //Cuando se hace click en añadir
