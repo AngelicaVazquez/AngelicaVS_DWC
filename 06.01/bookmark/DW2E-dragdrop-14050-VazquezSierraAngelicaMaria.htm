@@ -33,14 +33,20 @@
                 this.descripcion = descripcion;
             }
             html(y){
+                var t = this;
                 var ele = document.createElement("div");
+                ele.id = y;
                 ele.innerHTML="bookmark "+y;
                 ele.draggable="true";
-                addEventListener("drag", function(event) {
-                event.preventDefault();
-                var data = event.datatransfer.setData("Text");
-            });
-                var t = this;
+                //MIRAAAAR
+                ele.addEventListener("drag", function(ev) {
+                ev.preventDefault();
+                var data = ev.datatransfer.setData("Text");
+                });
+                //LOOK
+                ele.addEventListener("dragstart", function(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+                });
                 ele.addEventListener("click", mostrarContenido.bind(null,t));
                 document.getElementById("contenedorBookmarks").append(ele);
             }
@@ -145,10 +151,13 @@
             //el.parentNode.removeChild(el);
             var del = document.createElement("div");
             del.style.order="50";
-            del.addEventListener("drop", function(event) {
-                event.preventDefault();
-                var data = event.dataTransfer.getData("Text");
-                event.parentNode.removeChild(data);
+            del.addEventListener("drop", function(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("Text");
+                ev.parentNode.removeChild(data);
+            });
+            del.addEventListener("dragover", function(ev) {
+            ev.preventDefault();
             });
             del.innerHTML="Arrastre aquí para eliminar";
             document.getElementById("contenedorBookmarks").appendChild(del);
