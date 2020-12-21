@@ -4,27 +4,28 @@
     <title>Drag and drop</title>
     <style>
         * {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
         }
 
-        div {
+        form input {
+            border-radius: 5px;
+        }
+        div:not(#contenedor) {
             border: 1px black solid;
             border-radius: 5px;
             text-align: center;
             padding: 2px;
         }
-        #contenedorBookmarks > div:not(:first-child):not(:last-child):hover {
+        #contenedorBookmarks > div:not(:first-child):hover {
             cursor: pointer;
         }
 
-        #contenedorEtiquetas > div:not(:first-child):not(:last-child):hover {
+        #contenedorEtiquetas > div:not(:first-child):hover {
             cursor: pointer;
         }
     </style>
 	<script>
         //usar la lista como zona de drop para añadir, el ultimo campo [drop] como zona para borrar. por ejemplo
-        //funciones para crear los cuadros con sus caracteristicas
-
         class Bookmark{
             constructor(titulo,url,descripcion){
                 this.titulo = titulo;
@@ -34,8 +35,13 @@
             html(y){
                 var ele = document.createElement("div");
                 ele.innerHTML="bookmark "+y;
+                ele.draggable="true";
+                addEventListener("drag", function(event) {
+                event.preventDefault();
+                var data = event.datatransfer.setData("Text");
+            });
                 var t = this;
-                ele.addEventListener("click", mostrarContenido(t));
+                ele.addEventListener("click", mostrarContenido.bind(null,t));
                 document.getElementById("contenedorBookmarks").append(ele);
             }
         }
@@ -55,9 +61,6 @@
             numE = window.prompt("Número de etiquetas");
             divBookmarks(numB);
             divEtiquetas(numE);
-
-
-
         }
 
         function divFiltro(arrayEtiquetas) {
@@ -81,41 +84,74 @@
             //Div del contenido
             var contenedorContenido = document.createElement("div");
             contenedorContenido.id = "contenedorContenido";
+            contenedorContenido.style.flexBasis="21.5rem";
             document.getElementById("contenedor").appendChild(contenedorContenido);
 
             //Formulario
             var form = document.createElement("form");
             form.id = "form";
-            form.setAttribute('method',"post");
-            form.setAttribute('action',"submit.php");
+            /*form.setAttribute('method',"post");
+            form.setAttribute('action',"");*/
             //Título
+            var iTxt = document.createElement("input");
+            iTxt.setAttribute('type',"text");
+            iTxt.setAttribute('value',"Título");
+            iTxt.setAttribute('readOnly',"true");
+            iTxt.style.border="none";
             var i = document.createElement("input");
             i.setAttribute('type',"text");
             i.setAttribute('name',"titulo");
+            
             //URL
+            var i2Txt = document.createElement("input");
+            i2Txt.setAttribute('type',"text");
+            i2Txt.setAttribute('value',"URL");
+            i2Txt.setAttribute('readOnly',"true");
+            i2Txt.style.border="none";
             var i2 = document.createElement("input");
             i2.setAttribute('type',"text");
             i2.setAttribute('name',"url");
             //Descripción
+            var i3Txt = document.createElement("input");
+            i3Txt.setAttribute('type',"text");
+            i3Txt.setAttribute('value',"Descripción");
+            i3Txt.setAttribute('readOnly',"true");
+            i3Txt.style.border="none";
             var i3 = document.createElement("input");
             i3.setAttribute('type',"text");
             i3.setAttribute('name',"descripcion");
 
-            var s = document.createElement("input");
+            /*var s = document.createElement("input");
             s.setAttribute('type',"submit");
-            s.setAttribute('value',"Guardar");
+            s.setAttribute('value',"Guardar");*/
 
+            form.appendChild(iTxt);
             form.appendChild(i);
+            form.appendChild(i2Txt);
             form.appendChild(i2);
+            form.appendChild(i3Txt);
             form.appendChild(i3);
-            form.appendChild(s);
+            //form.appendChild(s);
 
             document.getElementById("contenedorContenido").appendChild(form);
 
             //Botón añadir
             var add = document.createElement("div");
             add.innerHTML="[ + ]";
+            add.addEventListener("click",addBookmark);
             document.getElementById("contenedorBookmarks").appendChild(add);
+
+            //Drop eliminar
+            //el.parentNode.removeChild(el);
+            var del = document.createElement("div");
+            del.style.order="50";
+            del.addEventListener("drop", function(event) {
+                event.preventDefault();
+                var data = event.dataTransfer.getData("Text");
+                event.parentNode.removeChild(data);
+            });
+            del.innerHTML="Arrastre aquí para eliminar";
+            document.getElementById("contenedorBookmarks").appendChild(del);
 
             for (let i=0; i < x; i++) {
                 var book = new Bookmark("B"+i,"url de B"+i,"descripcion de B"+i);
@@ -125,12 +161,11 @@
         }
 
         function divContenido(t,u,d) {
-            //const returnedTarget = Object.assign(target, source);
-            //document.getElementById("contenedorContenido").cloneNode(contenidoBook);
-            
-            document.getElementById("form").elements["titulo"].text = t;
+            //Muestra los valores del elemento que hizo click
+            document.getElementById("form").elements["titulo"].value = t;
             document.getElementById("form").elements["url"].value = u;
             document.getElementById("form").elements["descripcion"].value = d;
+            //Botón guardar falta funcionalidad
         }
 
         function divEtiquetas(x) {
@@ -138,6 +173,8 @@
             //Contenerodr de las etiquetas
             var contenedorEtiquetas = document.createElement("div");
             contenedorEtiquetas.id = "contenedorEtiquetas";
+            contenedorEtiquetas.style.display="flex";
+            contenedorEtiquetas.style.flexDirection="column";
             document.getElementById("contenedor").appendChild(contenedorEtiquetas);
 
             //Div del título
@@ -148,6 +185,7 @@
             //Botón añadir
             var add = document.createElement("div");
             add.innerHTML="[ + ]";
+            add.addEventListener("click",addTag);
             document.getElementById("contenedorEtiquetas").appendChild(add);
 
             for (let i=0; i < x; i++) {
@@ -155,25 +193,37 @@
                 elem.innerHTML="etiqueta " + i;
                 document.getElementById("contenedorEtiquetas").appendChild(elem);
             }
+            //Drop eliminar
+            var del = document.createElement("div");
+            del.style.order="50";
+            del.innerHTML="Arrastre aquí para eliminar";
+            document.getElementById("contenedorEtiquetas").appendChild(del);
         }
 
         //Cuando se hace click en un bookmark
         function mostrarContenido(o) {
             //document.getElementById("contenedorContenido").appendChild(this);
-            document.getElementById("form").reset();
+            //document.getElementById("form").reset();
             t = o.titulo;
             u = o.url;
             d = o.descripcion;
             divContenido(t,u,d);
             //console.log(o);
         }
-        function clearfield() {
-            document.getElementById("form").reset();
-        }
 
         //Cuando se hace click en añadir
         function addBookmark() {
+            numB++;
+            var book = new Bookmark("B"+numB,"url de B"+numB,"descripcion de B"+numB);
+            book.html(numB);
+        }
 
+        //Cuando se hace click en añadir
+        function addTag() {
+            numE++;
+            var elem = document.createElement("div");
+            elem.innerHTML="etiqueta " + numE;
+            document.getElementById("contenedorEtiquetas").appendChild(elem);
         }
 
 
