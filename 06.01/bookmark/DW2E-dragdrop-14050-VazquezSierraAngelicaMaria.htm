@@ -27,10 +27,11 @@
 	<script>
         //usar la lista como zona de drop para añadir, el ultimo campo [drop] como zona para borrar. por ejemplo
         class Bookmark{
-            constructor(titulo,url,descripcion){
+            constructor(titulo,url,descripcion,etiquetas){
                 this.titulo = titulo;
                 this.url = url;
                 this.descripcion = descripcion;
+                this.etiquetas = etiquetas;
             }
             html(y){
                 var t = this;
@@ -38,14 +39,11 @@
                 ele.id = y;
                 ele.innerHTML="bookmark "+y;
                 ele.draggable="true";
-                //MIRAAAAR
                 ele.addEventListener("drag", function(ev) {
                 ev.preventDefault();
-                var data = ev.datatransfer.setData("Text");
                 });
-                //LOOK
                 ele.addEventListener("dragstart", function(ev) {
-                ev.dataTransfer.setData("text", ev.target.id);
+                ev.dataTransfer.setData("Text", ele.id);
                 });
                 ele.addEventListener("click", mostrarContenido.bind(null,t));
                 document.getElementById("contenedorBookmarks").append(ele);
@@ -69,9 +67,9 @@
             divEtiquetas(numE);
         }
 
-        function divFiltro(arrayEtiquetas) {
+        /*function divFiltro(arrayEtiquetas) {
             
-        }
+        }*/
 
         function divBookmarks(x) {
 
@@ -92,12 +90,19 @@
             contenedorContenido.id = "contenedorContenido";
             contenedorContenido.style.flexBasis="21.5rem";
             document.getElementById("contenedor").appendChild(contenedorContenido);
+            contenedorContenido.addEventListener("drop", function(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            var nodeCopy = document.getElementById(data).cloneNode(true);
+            ev.target.appendChild(nodeCopy);
+            });
+            contenedorContenido.addEventListener("dragover", function(ev) {
+            ev.preventDefault();
+            });
 
             //Formulario
             var form = document.createElement("form");
             form.id = "form";
-            /*form.setAttribute('method',"post");
-            form.setAttribute('action',"");*/
             //Título
             var iTxt = document.createElement("input");
             iTxt.setAttribute('type',"text");
@@ -148,13 +153,13 @@
             document.getElementById("contenedorBookmarks").appendChild(add);
 
             //Drop eliminar
-            //el.parentNode.removeChild(el);
             var del = document.createElement("div");
             del.style.order="50";
             del.addEventListener("drop", function(ev) {
                 ev.preventDefault();
                 var data = ev.dataTransfer.getData("Text");
-                ev.parentNode.removeChild(data);
+                ev.target.parentNode.removeChild(document.getElementById(data));
+                console.log(data);
             });
             del.addEventListener("dragover", function(ev) {
             ev.preventDefault();
@@ -169,11 +174,15 @@
             }
         }
 
-        function divContenido(t,u,d) {
+        function divContenido(t,u,d,e) {
             //Muestra los valores del elemento que hizo click
             document.getElementById("form").elements["titulo"].value = t;
             document.getElementById("form").elements["url"].value = u;
             document.getElementById("form").elements["descripcion"].value = d;
+            //var displayE = document.createElement("div");
+            //displayE.id="displayE";
+            //document.getElementById("contenedorContenido").appendChild(displayE);
+
             //Botón guardar falta funcionalidad
         }
 
@@ -200,39 +209,62 @@
             for (let i=0; i < x; i++) {
                 var elem = document.createElement("div");
                 elem.innerHTML="etiqueta " + i;
+                elem.id="E"+i;
+                elem.draggable="true";
+                elem.addEventListener("drag", function(ev) {
+                ev.preventDefault();
+                });
+                elem.addEventListener("dragstart", function(ev) {
+                ev.dataTransfer.setData("Text", "E"+i);
+                });
                 document.getElementById("contenedorEtiquetas").appendChild(elem);
             }
             //Drop eliminar
             var del = document.createElement("div");
             del.style.order="50";
+            del.addEventListener("drop", function(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            console.log(data);
+            ev.target.parentNode.removeChild(document.getElementById(data));
+            });
+            del.addEventListener("dragover", function(ev) {
+            ev.preventDefault();
+            });
             del.innerHTML="Arrastre aquí para eliminar";
             document.getElementById("contenedorEtiquetas").appendChild(del);
         }
 
         //Cuando se hace click en un bookmark
         function mostrarContenido(o) {
-            //document.getElementById("contenedorContenido").appendChild(this);
-            //document.getElementById("form").reset();
             t = o.titulo;
             u = o.url;
             d = o.descripcion;
-            divContenido(t,u,d);
-            //console.log(o);
+            e = o.etiquetas;
+            divContenido(t,u,d,e);
         }
 
         //Cuando se hace click en añadir
         function addBookmark() {
-            numB++;
             var book = new Bookmark("B"+numB,"url de B"+numB,"descripcion de B"+numB);
             book.html(numB);
+            numB++;
         }
 
         //Cuando se hace click en añadir
         function addTag() {
-            numE++;
             var elem = document.createElement("div");
+            elem.id="E"+numE;
+            elem.draggable="true";
+            elem.addEventListener("drag", function(ev) {
+            ev.preventDefault();
+            });
+            elem.addEventListener("dragstart", function(ev) {
+            ev.dataTransfer.setData("Text", elem.id);
+            });
             elem.innerHTML="etiqueta " + numE;
             document.getElementById("contenedorEtiquetas").appendChild(elem);
+            numE++;
         }
 
 
