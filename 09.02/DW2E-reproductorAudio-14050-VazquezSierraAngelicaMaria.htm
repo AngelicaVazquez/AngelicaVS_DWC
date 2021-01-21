@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Actividad 09.02</title>
+
+<script>
+
+//cargar audios, cambiar color del fondo ritmo audio, obtener info del audio
+
+    function iniciar(){
+        var contenedor = document.createElement("div");
+        contenedor.id="contenedor";
+        contenedor.style.width="75vw";
+        contenedor.style.height="5rem";
+        contenedor.style.border="solid darkgrey 1px";
+        contenedor.style.borderRadius="5px";
+        contenedor.style.boxShadow="0px 5px 30px grey";
+        contenedor.style.margin="auto";
+        contenedor.style.marginTop="5rem";
+        document.body.appendChild(contenedor);
+
+        var audios = [];
+        var a1 = new Audio();
+        a1.src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+        audios.push(a1);
+        //a1.play();
+        var intID = setInterval(duracion,1000,intID,a1);
+
+        
+        var a2 = new Audio();
+        a2.src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+        audios.push(a2);
+
+        var a3 = new Audio();
+        a3.src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+        audios.push(a3);
+
+        if (condition) {
+            
+        } else {
+            
+        }
+    }
+    function duracion(intID,a1){
+        clearInterval(intID);
+        var sec = a1.currentTime;
+        contenedor.innerHTML=Math.round(sec);
+    }
+window.onload = iniciar;
+</script>
+</head>
+<body>
+</body>
+</html>
