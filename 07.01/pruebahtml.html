@@ -7,10 +7,9 @@
         //Contenedor principal
         var contenedor = document.createElement("div");
         contenedor.id="contenedor";
-        contenedor.style.display="flex";
-        contenedor.style.alignItems="space-between";
-        contenedor.style.width="50vw";
-        //contenedor.style.height="5rem";
+        contenedor.style.display="grid";
+        contenedor.style.gridTemplateColumns="repeat(3, 1fr)";
+        contenedor.style.gridAutoRows="minmax(100px, auto)";
         contenedor.style.border="solid darkgrey 1px";
         document.body.appendChild(contenedor);
         
@@ -27,6 +26,8 @@
         r.min="0";
         r.max="255";
         r.value="125";
+        r.style.gridColumn="1";
+        r.style.gridRow="1";
         document.getElementById("divR").appendChild(r);
 
         //G
@@ -40,6 +41,8 @@
         g.min="0";
         g.max="255";
         g.value="125";
+        g.style.gridColumn="2";
+        g.style.gridRow="1";
         document.getElementById("divG").appendChild(g);
 
         //B
@@ -53,11 +56,15 @@
         b.min="0";
         b.max="255";
         b.value="125";
+        b.style.gridColumn="3";
+        b.style.gridRow="1";
         document.getElementById("divB").appendChild(b);
 
         var muestra = document.createElement("div");
         muestra.id="muestra";
-        muestra.style.flexGrow=1;
+        muestra.style.gridColumn="1/4";
+        muestra.style.gridRow="2";
+        muestra.style.border="solid darkgrey 1px";
         document.getElementById("contenedor").appendChild(muestra);
 
     }

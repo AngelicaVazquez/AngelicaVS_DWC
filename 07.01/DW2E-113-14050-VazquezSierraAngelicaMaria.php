@@ -13,10 +13,7 @@
         //Contenedor principal
         var contenedor = document.createElement("div");
         contenedor.id="contenedor";
-        contenedor.style.display="flex";
-        contenedor.style.alignItems="space-between";
-        contenedor.style.width="50vw";
-        //contenedor.style.height="5rem";
+        contenedor.style.display="grid";
         contenedor.style.border="solid darkgrey 1px";
         document.body.appendChild(contenedor);
         
