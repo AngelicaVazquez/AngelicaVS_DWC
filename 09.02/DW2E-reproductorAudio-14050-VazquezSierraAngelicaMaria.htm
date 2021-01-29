@@ -6,19 +6,23 @@
 <title>Actividad 09.02</title>
 
 <script>
-
 //cargar audios, cambiar color del fondo ritmo audio, obtener info del audio
 //array con los nombres
 
     var indx = 0;
     var audios = ["https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3","https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3","https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"];
+    var titulos = ["Tecno","Pebble","Haze"];
+    var fotos = ["https://cdn.pixabay.com/photo/2016/03/04/19/36/beach-1236581_960_720.jpg","https://cdn.pixabay.com/photo/2014/01/17/19/01/tree-247122_960_720.jpg","https://cdn.pixabay.com/photo/2020/05/16/10/14/ocean-5176878_960_720.jpg"];
     var audio = new Audio();
     var estaSonando = true;
 
     function iniciar(){
         var contenedor = document.createElement("div");
         contenedor.id="contenedor";
-        contenedor.style.width="75vw";
+        contenedor.style.backgroundSize="cover";
+        contenedor.style.backgroundImage="url("+fotos[0]+")";
+        contenedor.style.textAlign="center";
+        contenedor.style.width="20rem";
         contenedor.style.height="5rem";
         contenedor.style.border="solid darkgrey 1px";
         contenedor.style.borderRadius="5px";
@@ -34,17 +38,35 @@
         segundos.style.height="1em";
         document.getElementById("contenedor").appendChild(segundos);
 
+        //Botón Anterior
+        var botonAnterior = document.createElement("i");
+        botonAnterior.classList="fa fa-backward";
+        botonAnterior.style.margin="0.5em";
+        botonAnterior.style.fontSize="2em";
+        botonAnterior.addEventListener("click", anterior);
+        document.getElementById("contenedor").appendChild(botonAnterior);
+
         //Botón Reproducir
         var botonReproducir = document.createElement("i");
+        botonReproducir.id="botonReproducir";
+        botonReproducir.style.margin="0.5em";
+        botonReproducir.style.fontSize="2em";
         botonReproducir.classList="fa fa-play-circle-o";
         botonReproducir.addEventListener("click", reproducir);
         document.getElementById("contenedor").appendChild(botonReproducir);
 
+        //Botón Siguiente
+        var botonSiguiente = document.createElement("i");
+        botonSiguiente.classList="fa fa-forward";
+        botonSiguiente.style.margin="0.5em";
+        botonSiguiente.style.fontSize="2em";
+        botonSiguiente.addEventListener("click", siguiente);
+        document.getElementById("contenedor").appendChild(botonSiguiente);
     }
 
     //Tiempo reproducido
     function duracion(intID,a){
-        //en el pausar clearinterval
+        //en el pausar clearinterval?
         clearInterval(intID);
         var sec = a.currentTime;
         document.getElementById("segundos").innerHTML=Math.round(sec);
@@ -58,9 +80,14 @@
         if(estaSonando){
         audio.play();
         var intID = setInterval(duracion,1000,intID,audio);
+        estaSonando=false;
+        //document.getElementById("botonReproducir").classList
+        document.getElementById("botonReproducir").classList="fa fa-pause-circle-o";
         }
         else{
             audio.pause();
+            estaSonando=true;
+            document.getElementById("botonReproducir").classList="fa fa-play-circle-o";
         }
     }
 
@@ -71,11 +98,13 @@
             indx = 0;
         };
         audio.src = audios[indx];
+        document.getElementById("contenedor").style.backgroundImage = "url("+fotos[indx]+")";
+        console.log(fotos[indx]);
         reproducir();
     }
 
     //Función para botón Anterior
-    function siguiente(){
+    function anterior(){
         indx--;
         if (indx < 0) {
             indx = 2;
