@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html><html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
+<head>
+	<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+	<meta http-equiv='expires' content='Tue, 01 Jan 1980 1:00:00 GMT'/>
+	<link rel='stylesheet' type='text/css' href='estilo.css' media='all'/> 
+</head>
+<body><pre>
+<b>Contenidos</b>
+Conexion a datos: Connection,Command,Cadena de conexion
+Acceso a datos conectados: DataReader
+Acceso a datos desconectados: MySqlDataAdapter,DataSet,DataTable
+Controles de datos: DataGridView,BindingNavigator,ToolStrip
+
+<b>Referencias</b>
+[01] Introducción a VisualNet: modelo ado.net (p.281),(p.291),(p.303),(p.301)
+[02] Programación con VisualBasicNet: ado.net(p.663),DataBinding(p.683),DataAdapter(p.686),DataGrid(p.701)
+[03] <a href="https://www.dotnetperls.com/datacolumn-vbnet" target="_blank">datacolumn</a> 
+<a href="http://www.dotnetperls.com/datarow-vbnet" target="_blank">datarow</a> <a href="http://www.dotnetperls.com/datatable-vbnet" target="_blank">datatable</a> <a href="http://www.dotnetperls.com/dataset-vbnet" target="_blank">dataset</a> <a href="http://www.dotnetperls.com/datagridview-vbnet" target="_blank">datagridview</a> <a href="https://msdn.microsoft.com/es-es/library/2wcswths%28v=vs.110%29.aspx" target="_blank">databindnavigator</a> 
+[04] <a href="http://msdn.microsoft.com/es-es/library/k39d6s23%28v=vs.110%29.aspx" target="_blank">Control DataGridView</a>
+[05] <a href="http://msdn.microsoft.com/es-es/library/8zhc8d2f%28v=vs.110%29.aspx" target="_blank">Control BindingNavigator</a>
+
+<b>Actividad</b>
+(ver 3-2.controlControles)
+* enlace tardio y temprano, option strict off
+* directcast
+* typeof control is ; control.GetType() Is GetType(PictureBox)
+* crear un control y eventos por codigo , me.controls
+
+<b>Actividad</b>
+Realizar una parrilla de 10x10 botones iguales.
+Crear por código los botones, establecer su posicion, dimensiones y color
+Establecer por código un evento para que al pasar por encima cambie de color.
+
+<b>Actividad</b>
+(ver 1415-616)
+Un examen anterior para practicar.
+
+<b>Actividad</b>
+(ver 4-3.sorteo6)
+Uso de MySqlConnection-MySqlCommand-MySqlDataReader-DataTable-DataGridView [03]
+
+<b>Actividad</b>
+(ver datos-mysql)
+Crea una conexión a tu bbdd muestra los datos en un textbox
+<a href="http://dev.mysql.com/downloads/connector/net/" target="_blank">Añadir conector a mysql</a>
+
+<b>Actividad</b>
+(ver datos-datagrid)
+Uso de dataAdapter(fill)-dataTable-dataGridView-dataAdapter(update)
+Cargar en un DataGridView los datos de una tabla de tu bbdd. Operaciones en el DataGridView :
+* borrar con doble click registros
+* insertar registros
+* ordenar por cabeceras
+* DataAdapter uso de datos conectados ,fill,update [01][02]
+
+<b>Actividad</b>
+Desarrollar una aplicación para leer datos de tu bbdd y generar un fichero xml con los mismos. Serán utiles los metodos de dataset.
+
+<b>Actividad</b>
+(ver datos-bindingnavigator)[06]
+* Usar las tres opciones : DataSet, DataTable, BindingSource. Manejar datos desde un DataGridView
+* Añadir el control BindingNavigator.
+* Realizar las operaciones básicas sobre la base de datos con este control BN (insertar,borrar,modificar).
+* Añadir en ToolStripTextBox al control BindingNavigator un textBox y programar para seleccionar registro.
+
+<b>Actividad</b>
+(ver programarBinding)
+* datarow-datatable-dataset-xml-bindingsource-bindingnavidator-controlesBN
+* programar binding navigator un boton para borrar todos los registros, mostrar un dialogo de confirmacion ACEPTAR/CANCELAR
+* programar binding navigator un boton para meter 5 registros al final del datagridview con todos los campos vacios
+
+</pre></body>
+</html>

@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html><html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
+<head>
+	<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+	<meta http-equiv='expires' content='Tue, 01 Jan 1980 1:00:00 GMT'/>
+	<link rel='stylesheet' type='text/css' href='estilo.css' media='all'/> 
+</head>
+<body><pre>
+<b>Contenidos</b>
+Conceptos básicos ajax, xml, json
+
+<b>Referencias</b>
+[01] <a target='_blank' href='http://librosweb.es/ajax/capitulo_1.html'>se acabo recargar paginas sincronamente</a>
+[02] <a target='_blank' href='https://www.w3schools.com/xml/ajax_intro.asp'>tutorial ajax</a>
+[03] <a target='_blank' href='https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp'>send a Request To a Server</a>
+[04] <a target='_blank' href='http://notasjs.blogspot.com/2013/09/politica-del-mismo-origen-same-origin.html'>politica del mismo origen</a>
+[06] <a target='_blank' href='http://www.w3schools.com/xml/default.asp'>home tuto xml</a>
+[07] <a target='_blank' href='http://librosweb.es/ajax/capitulo_3.html'>javascript avanzado objetos</a>
+[08] <a target='_blank' href='https://www.w3schools.com/xml/ajax_xmlfile.asp'>ejemplo XML</a>
+[09] <a target='_blank' href='https://www.w3schools.com/js/js_json_parse.asp'>ejemplo json</a>
+[10] <a target='_blank' href='https://www.w3schools.com/xml/xml_whatis.asp'>xml intro</a>
+[11] <a target='_blank' href='https://www.w3schools.com/js/js_json_intro.asp'>json intro</a>
+[21] <a target='_blank' href='https://www.todojs.com/controlar-la-ejecucion-asincrona/'>conferencia sobre las llamadas asincronas de js</a>
+[22] <a target='_blank' href='https://www.w3schools.com/js/js_json_jsonp.asp'>jsonp</a>
+[23] <a target='_blank' href='https://developers.google.com/web/fundamentals/primers/promises'>promises</a>
+[30] <a target='_blank' href='https://www.w3schools.com/xml/xml_examples.asp'>ejemplos xml</a>
+
+<b>Actividad</b>
+Ver [02](ver ejemploBuscador)
+En este ejemplo vemos una petición AJAX al servidor.
+Copiar y ejecutar el ejemplo (<a target='_blank' href='https://www.w3schools.com/php/php_ajax_php.asp'>codigo</a>) 
+Analizar el funcionamiento en el inspector de red.
+
+<b>Actividad</b>
+Que es ajax [01][02][03]
+
+<b>Actividad</b>
+(ver 113)
+Resolver el ejercicio.
+lenguaje: strtoupper, str_pad,dechex, XMLHttpRequest, xhttp.open, xhttp.send
+* DW2E-113-expediente-ApellidosNombre.php ; ENE29-2100 
+
+<b>Actividad</b>
+Introduccion JSON [07][11]. Cargar el ejemplo, ejecutar y analizar el código [09].
+
+<b>Actividad</b>
+Introduccion XML [06][10]. Cargar el ejemplo, ejecutar y analizar el código [08]
+
+<b>Actividad</b>
+(ver ejemplosXML)[30]
+Ejemplos de como serializar XML entre javascript y php.
+
+<b>Actividad</b>
+(ver ajax)
+Establecer diferentes opciones en la petición ajax al servidor: get/post, sincrono/asincrono, url/parametros, html/datos/json/xml
+-Abrir el inspector>red del navegador. 
+-Abrir inspector>consola
+-Ejecutar el ejemplo
+-Analiza y completa los escenarios 5 y 6
+-Analiza si se pueden mezclar opciones ? get+parametros, post+url, que sucede ? que opciones no estan permitidas ?
+
+<b>Actividad</b>
+(ver callBacksHell)[21]
+Las llamadas asincronas de ajax encadenadas generan el problema de seguir el flujo del código. Podemos usar promise [23] Javascript implementa las promises para resolverlo, un objeto que maneja este flujo. De forma mas sencilla dejo un ejemplo de como organizar una secuencia asincrona, con programación simple.
+-Modificar el retardo a  500ms para ver mas claro los tiempos.
+-Modificar el código para tener 10 envios
+
+<b>Actividad</b>
+(ver mismoOrigen)[04]
+Ejemplo de politica del mismo origen. No hay respuesta si incumplimos la politica del mismo origen. 
+- Podemos buscar para Chrome hay una forma de que el navegador no evalue la politica del mismo origen.
+
+<b>Actividad</b>
+(ver eB-jsonp, ejemploBuscador)[22]
+Analiza el ejemplo eB-jsonp. Haz 4 versiones de ejemploBuscador, pasa los datos desde el servidor en: xml, json, jsonp, jsonp-callback
+* DW2E-datosServidor-expediente-ApellidosNombre.7z ; FEB01-2100
+
+</pre></body>
+</html>

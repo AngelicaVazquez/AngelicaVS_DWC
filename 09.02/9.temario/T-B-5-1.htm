@@ -1,0 +1,317 @@
+<!DOCTYPE html><html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
+<head>
+	<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+	<meta http-equiv='expires' content='Tue, 01 Jan 1980 1:00:00 GMT'/>
+	<link rel='stylesheet' type='text/css' href='estilo.css' media='all'/> 
+</head>
+<body><pre>
+<b>Contenidos</b>
+Lenguaje:
+.intro
+.where to
+.output
+.syntax
+.comments
+.debugging
+.events
+.
+.variables
+.operators
+.arithmetic
+.assignement
+.data types
+.functions
+.strings 
+.string methods
+.numbers
+.number methods
+.
+.arrays,methods,sort,iteration
+.math
+.random
+.booleans
+.comparisons
+.conditions,switch
+.loop for,while,break,continue
+.errors
+.
+.date
+.scope
+.hoisting
+.strict mode
+.this
+.let,const
+.arrow function
+.style,best practices
+.mistakes
+
+<b>Referencias</b>
+[01] <a target='_blank' href='https://www.w3schools.com/js/default.asp'>javascript w3c</a>
+[02] <a target='_blank' href='https://uniwebsidad.com/libros/javascript?from=librosweb'>javascript uniwebsidad</a>
+[03] <a target='_blank' href='https://es.wikibooks.org/wiki/Programaci%C3%B3n_en_JavaScript/Ejemplos_de_c%C3%B3digo#Caso_10:_Manejando_el_canvas_para_gr%C3%A1ficos_web'>10 ejemplos</a>
+[04] <a target='_blank' href='https://es.wikibooks.org/wiki/Programaci%C3%B3n_en_JavaScript'>javascript wikibooks</a>
+[05] <a target='_blank' href='https://developer.mozilla.org/es/docs/Web/JavaScript/Guide'>javascript mozilla</a>
+[N2] <a target='_blank' href='https://www.w3schools.com/Css/tryit.asp?filename=trycss_table_fancy'>estilos a una tabla</a>
+[N3] <a target='_blank' href='https://www.w3schools.com/html/html5_canvas.asp
+'>canvas</a>
+[] pildoras js 1-2 ; info
+[] pildoras js 3-8 ; sintaxis
+[] pildoras js 11-20 ; estructura
+[] pildoras js 21 ; funciones
+
+<b>Actividad</b>
+(ver paginaBasica,paginaBasica2)
+Uso de las instrucciones esenciales con ejemplos.
+-Cargar los programa. Ejecutar. Revisión del codigo.
+-window.onload = iniciar
+-ele.addEventListener('click',clickCaja)
+-var ele=document.getElementById('caja1')
+-ele.style.border='1px solid #000'
+-var ele=document.createElement(tipo)
+-document.body.appendChild(ele);
+-return ele
+
+<b>Actividad</b>
+(ver menu1a)
+-Crea un menu con tres nodos "div". Crea un nodo "p"
+-Al pulsar cada "div" se deba cargar un texto en el nodo "p"
+-Los textos deben ser diferentes y de 80 caracteres.
+-Usar "float:left" para el layout
+-Crear una funcion para obtener un numero aleatorio entre dos numeros
+
+<b>Actividad</b>
+(ver menu1b)
+-Partiendo de menu1a
+-Crea un menu con 20 nodos "div". 
+-Los textos deben ser diferentes y de 240 caracteres.
+* DM2E-menu1b-expediente-ApellidosNombre.htm ; OCT16-2100 
+
+<b>Actividad</b> 
+Ver [01][02][03][04]
+Sintaxis basica del lenguaje.
+
+<b>Actividad</b>
+(ver lenguajeEjemplos)
+Un ejemplo de como recorrer objetos o arrays asociativos en javascript con for..in., añade for..of en el array y objeto.
+
+<b>Actividad</b>
+(ver tablero1)
+- Crea un tablero de 8x8.
+- Añade atributos para posicionar tus celdas. Muestra las celdas separadas. Puedes usar width, height, margin, border, clear, float
+- Cada celda al hacer click muestra con un alert un nombre y las coordenadas
+* DM2E-tablero1-expediente-ApellidosNombre.htm ; OCT21-2100 
+
+<b>Actividad</b>
+(ver tablero2)
+Modificar tablero1 y añadir:
+- Mostrar dentro de cada caja H
+- Al hacer click dentro de cada caja mostrar el nombre y las coordenadas.
+- Al hacer clcick en la ultima caja borrar todos los innerHTML de todas.
+* DM2E-tablero2-expediente-ApellidosNombre.htm ; OCT21-2100 
+
+<b>Actividad</b>
+(ver tablero3) 
+Modificar tablero1 y añadir:
+- Dimensiones al azar entre un valor maximo y un valor minimo. Cambiaran en cada recarga. 
+- Mostrar el texto HXY , siendo XY las coordenadas
+- Click en la ultima caja borrar todos los textos.
+- Click en la caja presentar CXY.
+* DM2E-tablero3-expediente-ApellidosNombre.htm ; OCT21-2100 
+
+<b>Actividad</b>
+(ver tablero4)
+Modificar tablero1 y añadir:
+- Colores al azar, al recargar de la pagina, cambiar los colores.
+- Click en la caja la ponerla en blanco y cambia los colores de las demas.
+- Haz una funcion que retorne el color al azar
+* DM2E-tablero4-expediente-ApellidosNombre.htm ; OCT21-2100 
+
+<b>Actividad</b>
+(ver tablero4b)
+Porque en tablero4 salen colores repetidos si son tres numeros al azar entre 0 y 255 ? 
+Buscar el fallo en el codigo. Corregir la funcion.
+* DM2E-tablero4b-expediente-ApellidosNombre.htm ; OCT21-2100 
+
+<b>Actividad</b>
+(ver tablero5)
+Diseña tu propio tablero
+* opcional
+* DM2E-tablero5-expediente-ApellidosNombre.htm ; OCT21-2100 
+
+<b>Actividad</b>
+(ver nif.htm)
+Crear un programa para calcular la letra del nif
+- pedir datos por pantalla con prompt: numeros y letra
+- chequear numero entre 0 y 99999999
+- mostrar con alert si coinciden letra y numero
+- usar prompt y alert.
+- añade tus propios chequeos de entrada
+nota: sobre el uso de pop-up https://neoattack.com/neowiki/pop-up/
+* DM2E-nif-expediente-ApellidosNombre.htm ; OCT26-2100 
+
+<b>Actividad</b>
+Ver [03] 
+Ejecutar caso 10
+* opcional
+
+<b>Actividad</b>
+(ver listas)
+Genera un array de 10 números al azar entre 0 y 1000. 
+- Imprime por pantalla
+- Lista
+- En orden ascendnte
+- En orden descendente
+- Filtra los numeros entre 0 y 100 incluidos
+- Calcula la media
+- Calcula la suma
+- Calcula el maximo
+- Calcula el minimo
+lenguaje:filter,reduce,min,apply,sort
+* DM2E-listas-expediente-ApellidosNombre.htm ; OCT26-2100 
+
+<b>Actividad</b>
+(ver listas2)
+Repetir el ejercicio anterior, ahora con una lista de objetos.
+Atributos del objeto : 
+-color(#aabbcc),
+-texto(1 a 10 char),
+-nivel(A,B o C),
+-version(numero al azar de 0 a 9). 
+Imprime:
+- Los nombres y valores de los atributos del primer objeto
+Usando el atributo version, imprime:
+- Lista de versiones
+- En orden ascendnte
+- En orden descendente
+- Filtra los numeros entre 0 y 5 incluidos
+- Calcula la media
+- Calcula la suma
+- Calcula el maximo
+- Calcula el minimo
+lenguaje:for..in,for..of,reduce,objeto.atributo
+* DM2E-listas2-expediente-ApellidosNombre.htm ; OCT26-2100 
+
+<b>Actividad</b>
+(ver listas3)
+Añade atributos a los objetos para pintar cada uno como div.
+.alto=al azar entre: 50,70,90
+.ancho=al azar entre: 40,60
+.color=aleatorio , R:250-255 , G:0-255 ,  B:0-255
+.nivel=A,B o C
+.texto=una letra al azar 'ABCDEFGHIJKL'
+.version=al azar entre 0..9
+Crea un div contenedor para cada lista de objetos. Muestra estas listas:
+-Listado
+-Ascendente
+-Descendente
+-Filtrado
+-Suma (imprime solo como texto el resultado)
+* DM2E-listas3-expediente-ApellidosNombre.htm ; OCT28-2100 
+
+<b>Actividad</b>
+(ver tablaValores)
+- Crea una tabla con los valores del seno y coseno y los campos indicados. La precision es 14 digitos.
+- Presentala como texto
+- Presentala como una tabla con estilos [n1]
+- Dibuja usando canvas la tabla de valores [n2](canvas)
+-lenguaje: class tabla, Math, split, canvas, table-th-tr-td, className
+* DM2E-tablaValores-expediente-ApellidosNombre.htm ; OCT28-2100 
+
+<b>Actividad</b>
+(ver tablaValores2.htm)
+Crea una funcion para dibujar. Crea nuevas tablas de valores. Dibujalas con canvas..
+* DM2E-tablaValores2-expediente-ApellidosNombre.htm ; OCT28-2100 
+
+<b>Actividad</b>
+Usando el codigo de tablaValores dibuja una funcion amortiguada. Dibuja varias funciones juntas cambiando sus parametros.
+* opcional.
+
+<b>Actividad</b>
+(ver enteros.htm)
+Haremos un pagina de entrada de datos.
+- Añade N elementos textarea a tu página. N puede valer entre 2 y 20
+En este orden chequea:
+- Si todos estan rellenos y son enteros muestra los numeros ordenados ascendente y descendente
+- Si todas las cajas estan rellenas pero alguna no tiene un entero muestra 'hay entradas que no son enteros' 
+- Si alguna esta vacia 'faltan X por rellenar complete'
+- Si alguna entrada no es un número entero muestra 'alguna no es entero'
+- Si todos estan vacios, solicita al usuario 'rellene con numeros enteros'
+Lenguaje:[], push, for..of, filter, sort, parseInt, join, isNaN, =>, textarea , pre
+Puedes rehacer el ejercicio con tus propios chequeos y mensajes.
+* DM2E-enteros-expediente-ApellidosNombre.htm ; OCT30-2100 
+
+<b>Actividad</b>
+(ver menu2.htm)
+Hacer un menu por niveles descendentes. Partimos de una lista de datos.
+Tenemos una lista de localizaciones en diferentes nivel: continente,pais,ciudad
+indicados en el primer campo por la letra (A,B,C)
+Estas localizaciones estan enlazadas por el tercer campo.
+-Presentamos el primer nivel los continentes.
+-Al hacer un click sobre el continente tenemos que presentar los paises de ese continente.
+-Asi sucesivamente.
+-Presentar una lista de migas para informar en que nivel estamos
+Ampliacion:
+- Añadir mas datos
+- Añadir mas niveles 
+- Hacer la la lista de migas sea clicable y mostrar en el menu
+- Usar una lista de objetos para el array sitios y los metodos de array
+Lenguaje: div, [], push, for of, for in, split, addEventListener, :hover, className, innerHTML=''
+var sitios=[
+'A1#america#00',
+'A2#europa#00',
+'A3#africa#00',
+'A4#asia#00',
+'B1#canada#A1',
+'B2#eeuu#A1',
+'B3#brasil#A1',
+'B4#argentina#A1',
+'B5#urugay#A1',
+'B6#chile#A1',
+'B7#francia#A2',
+'B8#italia#A2',
+'C1#toronto#B1',
+'C2#quebec#B1',
+'C3#lyon#B7',
+'C4#paris#B7',
+'C5#bayona#B7',
+'C6#nantes#B7',
+'C7#toulouse#B7'
+];
+* DM2E-menu2-expediente-ApellidosNombre.htm ; NOV03-2100
+
+<b>Actividad</b>
+(ver fechas)
+Ejercicio para el tema de fechas.
+1) añadimos un control input type date y el evento change para imprimir una fecha en formato corto
+2) almacenamos 24 fechas generadas al azar en un array. las fechas es cualquier dia del año 2019
+3) organizar las fechas en un display a 6 columnas
+4) resolver las operaciones con el array de objetos fechas
+lenguaje:=[], push, new Date, setDate, getDate, sort(funtion), input type date, (1000*60*60*24), toFixed, getDate, getMonth, getFullYear, getTime, padStart
+* ejercicio para practicar el tema no hay que entregar
+
+<b>Actividad</b>
+(ver calendario)
+Realiza un calendario lineal
+-Establece con float y clear el maquetado de los dias en lineas
+-Poner todos los textos a 14px
+-Establece los estilos de cada tipo de dia usando clases (laborable,festivo,dentro del mes: normal,apagado)
+-Añade los meses de los meses con letras a 24px
+lenguaje:[],getMonth,getDay(dia de la semana),new Date,getTime,setDate,getDay()+1,var1=(cond)?val1:val2,if(cond)var=val;
+* DM2E-calendario-expediente-ApellidosNombre.htm ; NOV06-2100
+
+<b>Actividad</b>
+(ver calendario2.htm) 
+Transformar en una agenda:
+-El dia actual en otro color de fondo, azul.
+-Imprimir todos los año del 2019 al 2029 
+-Añadir estilos para el hover (no en los dias de relleno)
+-Almacenar un texto en cualquier dia. Usa prompt(), 
+no en los dias apagados, cuidado con el cancel.
+* DM2E-calendario2-expediente-ApellidosNombre.htm ; NOV12-2100
+
+<b>Actividad</b>
+Ver [03] 
+Ejecutar casos 4,5,6
+
+</pre></body>
+</html>

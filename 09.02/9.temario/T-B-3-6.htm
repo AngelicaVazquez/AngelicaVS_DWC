@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html><html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
+<head>
+	<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+	<meta http-equiv='expires' content='Tue, 01 Jan 1980 1:00:00 GMT'/>
+	<link rel='stylesheet' type='text/css' href='estilo.css' media='all'/> 
+
+<script src='pestañas.js'></script>
+<style>b{cursor: col-resize;}</style>
+
+</head>
+<body><pre>
+<b>Contenidos</b>
+Servicio de mapas: google, openstreetmap, proveedores
+Objetos js para los mapas
+Servicios de geocoding y geolocalizacion.
+
+<b>Referencias</b>
+[<a href='https://www.w3schools.com/graphics/google_maps_intro.asp' target='_blank'>01</a>] [<a href='https://developers.google.com/maps/documentation/javascript/adding-a-google-map' target='_blank'>02</a>] [<a href='https://developers.google.com/maps/documentation/javascript/tutorial' target='_blank'>03</a>] [<a href='https://leafletjs.com/examples.html' target='_blank'>04</a>] [<a href='https://leafletjs.com/reference-1.6.0.html' target='_blank'>05</a>] [<a href='https://nominatim.openstreetmap.org/search.php?q=madrid&polygon_geojson=1&viewbox=' target='_blank'>06</a>] [<a href='https://developer.mapquest.com/documentation/mapquest-js/v1.3/examples/basic-map/' target='_blank'>07</a>] [<a href='https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_geolocation' target='_blank'>11</a>] [<a href='https://blog.jorgeivanmeza.com/2011/06/como-acceder-a-la-geolocalizacion-desde-javascript/' target='_blank'>12</a>] [<a href='https://developer.mapquest.com/documentation/geocoding-api/' target='_blank'>14</a>] [<a href='https://www.openstreetmap.org/#map=6/40.007/-2.488' target='_blank'>15</a>] [<a href='https://nominatim.openstreetmap.org/search.php?q=madrid&polygon_geojson=1&format=json' target='_blank'>16</a>] [<a href='https://www.adictosaltrabajo.com/2016/06/22/mapas-interactivos-con-leaflet-js' target='_blank'>17</a>] [<a href='http://docs.openlayers.org/library/spherical_mercator.html' target='_blank'>18</a>] [<a href='https://epsg.io/4326' target='_blank'>19</a>] [<a href='https://openlayers.org/en/latest/examples/index.html' target='_blank'>21</a>] [<a href='https://leafletjs.com/plugins.html' target='_blank'>22</a>] [<a href='https://www.youtube.com/watch?v=kIID5FDi2JQ&feature=emb_logo' target='_blank'>23</a>] [<a href='https://docs.mapbox.com/mapbox-gl-js/example/add-image-animated/' target='_blank'>25</a>] [<a href='https://www.youtube.com/watch?v=AzSj0aRLYuQ' target='_blank'>26</a>] [<a href='https://thetruesize.com' target='_blank'>27</a>] [<a href='https://www.youtube.com/watch?v=wVnimcQsuwk' target='_blank'>28</a>] [<a href='https://www.youtube.com/watch?v=OYjFR_CGV8o' target='_blank'>29</a>] [<a href='https://www.tutorialspoint.com/google_maps/google_maps_tutorial.pdf' target='_blank'>30</a>] [<a href='https://developers.google.com/maps/documentation/javascript/coordinates' target='_blank'>31</a>] [<a href='https://developers.google.com/maps/documentation/javascript/usage-and-billing' target='_blank'>32</a>] [<a href='https://imagery.geocento.com/' target='_blank'>33</a>] [<a href='http://www.esa.int/Applications/Observing_the_Earth/Copernicus/Overview4' target='_blank'>34</a>] [<a href='http://www.gisandbeers.com/wp-content/uploads/2019/03/Sentinel-2-Tiles.mp4?_=1' target='_blank'>35</a>] [<a href='https://developer.mozilla.org/es/docs/Web/API/Geolocation/getCurrentPosition' target='_blank'>36</a>] [<a href='https://developers.google.com/maps/documentation/javascript/usage-and-billing' target='_blank'>37</a>] [<a href='https://developers.google.com/maps/documentation/javascript/examples' target='_blank'>38</a>] [<a href='https://www.youtube.com/watch?v=cB5LFAQfOME' target='_blank'>JOSM</a>] 
+
+<b>Actividad</b>
+Presentar los conceptos:
+-Un mapa en js [01]
+-Google Maps: tutorial,guia,referencia,ejemplos [03]
+-Mapas con leaflet.js , un ejemplo paso a paso [17]
+-Video: why all world maps are wrong [23]
+-Captura de imagenes [35][33][34]
+-Proyecciones [31][19]
+-Ejemplos de leafletjs [04]
+-Ejemplos de openlayers [21]
+-Ejemplos mapbox [25]
+-Servicio de GeoCoding, direccion en coordenadas [19][14][06]
+-Servicio de Geolocalizacion, posicionar al usuario con coordenadas [12]
+
+<b>Actividad</b>
+(ver mapaGoogle)
+Necesario pedir una jey para la api de google !
+Paseo por gMaps:
+- Mapa simple, marcador y callback [02] 
+- Tutorial en pdf [30]
+- Ejemplo y limitaciones [32]
+- Paseo por los ejemplos de gmaps [38]
+
+<b>Actividad</b>
+(ver openMap/index30,31) 
+Ejemplo de transformacion de coordenadas [27][18][19]
+Desde EPSG:4326(satelite) a Spherical Mercator(openlayer,google,ms virtual earth,yahoo). Pasamos de coordenadas esféricas a coordenadas planas para poder pintar sobre los tiles datos añadidos. 
+
+<b>Actividad</b>
+(ver openMap/index20) [22]
+Ejemplo de plugin y calculo de coordenades de un tile.
+1) Plugin de leaflet. El marcador se mueve al hace click en el mapa. Enlazar la libreria y plugin metodo proporcionado.
+2) Console.log muestra lat y lon y calcula las coordenadas de la tile [31]
+[a]:https://stackoverflow.com/questions/17364769/move-marker-on-openstreet-map-leaflet-api#17371411
+[b]:https://leafletjs.com/reference-1.4.0.html#tilelayer
+[c]:https://npm.taobao.org/package/leaflet.marker.slideto
+[d]:https://gitlab.com/IvanSanchez/Leaflet.Marker.SlideTo
+
+<b>Actividad</b>
+Crear el mapa, marcador y objetos siguiendo el video de maptiler [28][29]
+ 
+<b>Actividad</b>
+Crear la página web con la libreria Leaflet.js siguiendo los pasos [17]
+
+<b>Actividad</b>
+Crear tres ejemplos seleccionados de Leaflet Tutorials. Ejecutarlas y traza la red. Abrir el código fuente. [04]
+
+<b>Actividad</b>
+(ver openMap/index21.htm)
+-Uso de la api Leaflet para añadir mapa, marcadores, poligonos, circulos, posicionar el mapa, zoom. [05]
+-Ejemplo de geolocalización en Leaflet y js. [11][12][36]
+
+<b>Actividad</b>
+(ver openMap/index40.html)
+Crear una página simple para probar el servicio de geocoding mapquest. 
+Es necesario obtener una api-key de MapQuest Developer Network.
+Proporcionara una dirección al servicio usando un control (selector,textarea,..) y presentar en un mapa un marcador de esa localización.
+- uso del servicio Forward Geocode de mapquest enviando un GET [14]
+- dibuja un mapa basico de mapquest [07]
+Geocoding:
+- geocoding en QGIS [26] 
+- otros servicios: Batch Geocode, Reverse Geocode
+- nominatin y retorno de datos en formato JSON del poligono [06][16]
+- servicios de geocoding [15][06][19]
+
+<b>Actividad</b>
+(ver leaflet-providers-master)
+Crear una página usando un plugin de Leaflet para nuestro mapa.
+- Usaremos el pulgin basemap providers/leaflet-providers [05]. Descargar [a].
+- Selecionar el tilelayer (Stamen Watercolor) ver en index.html
+- Usar un mapa básico con un marcador y poner este tilelayer a tu mapa.
+[a] https://github.com/leaflet-extras/leaflet-providers
+
+<b>Actividad</b>
+(ver leaflet-providers-master-con-nubes)
+Crear la página anterior pero añadiendo los servicios meteorologicos. Será necesario solicitar la api-key. Descargar [a]
+- Obtener las API key de los servicios meteo [a]
+- Cargar la página de ejemplo [b] (la misma del anterior ejercicio).
+- Añadir las apikey en tu js para obtener los mapas con meteo
+- Trazar la red para ver las peticiones 
+[a] https://openweathermap.org/api
+[b] https://leaflet-extras.github.io/leaflet-providers/preview/
+
+<b>Actividad</b>
+(ver covid)
+Realizar el mapa presentado:
+0) Usar openstreetmap
+1) Posicion del mapa
+2) Nivel de zoom
+3) Estilo del mapa, blanco y negro con las lineas grises de los paises
+4) Circulos de 3 tamaños al menos 10,5,1 circulos de cada tamaño. Pueden estar en cualquier posición.
+5) Posicion aproximada del circulo grande.
+6) Estilo de los circulos.
+7) Leyendas en el mapa.
+8) Coloreado de los paises.
+[a] https://mappinggis.com/2014/02/como-anadir-una-leyenda-en-leaflet/
+* DM2E-covid-expediente-ApellidosNombre.7z ; FEB05-2100
+
+<b>Actividad</b>
+(ver mapaFinal)
+Crear una aplicación final con mapas con Leaflet. Este es un ejemplo de interface [b].
+1) Crear un variable json con los datos: las coordenadas, nombre, ciudad, nombre de imagen de 10 catedrales de europa. Leer el json [a] desde js. Se proporciona un archivo json con datos de ejemplo.
+2) Crear un menú con las catedrales. El menú contendrá la foto, el nombre y la ciudad de cada una.
+3) Crear un mapa y cargar los marcadores.
+4) Añadir un click en el menu para cada sitio para resaltar/animar el marcador correspondiente.
+5) Añadir la opción de seleccionar/deseleccionar cada marcador desde el menu.
+6) Añadir un boton para crear un poligono entre los marcadores seleccionados.
+7) Añadir el poligono creado como otra entrada en tu menu, solicitando un nombre al usuario.
+8) Mostrar en el menu alguna información del poligono ademas del nombre, como la superficie, numero de puntos...
+9) Selecciona el poligono en el menu y destacar el poligono en el mapa.
+10) Añadir la opción de selccionar y borrar los poligonos. Se deben borrar tanto en el menu como en el mapa.
+[a] https://www.w3schools.com/js/js_json_parse.asp
+[b] https://docs.mapbox.com/help/demos/gl-store-locator/step-five.html#
+* DM2E-mapaFinal-expediente-ApellidosNombre.7z ; FEB08-2100
+
+</pre></body>
+</html>

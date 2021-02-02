@@ -1,0 +1,30 @@
+<!DOCTYPE html><html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
+<head>	
+	<title>ies</title>
+	<meta http-equiv='content-type' content='text/html; charset=utf-8'/>
+	<meta http-equiv='expires' content='Tue, 01 Jan 1980 1:00:00 GMT'/>
+	<link rel="stylesheet" type="text/css" href="estilo.css" media="all"/> 
+
+	<script>
+	function show(a){
+		src=a+'.htm';
+		var frameElement=document.getElementById('marco');	
+		frameElement.src=src;
+	}
+	</script>
+</head>
+<body>
+	<div id='contenedor' >
+		<div id='cabecera' >
+			<div id='boton'><button class='btn2' type='button' id='general' onclick='show(this.id)'/>GENERAL</button></div>
+			<div id='boton'><button class='btn2' type='button' id='m-A' onclick='show(this.id)'/>SM1E OFIMATICA</button></div>
+			<div id='boton'><button class='btn2' type='button' id='m-B' onclick='show(this.id)'/>DM2E INTERFACES</button></div>
+			<div id='boton'><button class='btn2' type='button' id='m-C' onclick='show(this.id)'/>DW2E CLIENTE</button></div>
+		</div>			
+		<div id='contenido'>
+			<iframe id='marco' frameborder='0' src='imagen.htm'></iframe>
+			<br/>curso 2020/2021
+		</div>				
+	</div>	
+</body>
+</html>

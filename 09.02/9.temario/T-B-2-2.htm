@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html><html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
+<head>
+	<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+	<meta http-equiv='expires' content='Tue, 01 Jan 1980 1:00:00 GMT'/>
+	<link rel='stylesheet' type='text/css' href='estilo.css' media='all'/> 
+</head>
+<body><pre>
+<b>Contenidos</b>
+Instalacion y primer uso.
+
+<b>Referencias</b>
+Programación en VisualBasic.Net:
+[01] instalación, primer programa, código, entorno (cap.4 al 8)
+[02] entrada por main (p.191)
+[03] formularios (p.509) 
+[04] designer (p.512) 
+[05] messagebox, inputbox (p.99,102)
+[06] escribir, leer, escritir archivo de texto (p.492,494)
+[07] try..catch (p.475)
+[08] controles: button,label,foco,textbox,checkbox,radiobutton,groupbox,listbox,combobox (p.29)
+[09] <a target='_blank' href='http://msdn.microsoft.com/es-es/library/bd65th41(v=vs.90).aspx'>Doevents</a>
+[10] mysql : https://www.w3schools.com/php/php_mysql_intro.asp
+
+<b>Actividad</b> 
+(ver sorteo1)[01][03][04][07][08]
+Hacer un programa en VB que realize un sorteo entre dos numeros. Se suministra ejecutable.
+* Añadir excepciones y avisos al usuario para la entrada de datos incorrectas
+* Usar la clase Random para generar el numero al azar. 
+* controles: form,label,textbox,button
+* código: proyect,class,module,sub,function,private,public,random,isnumeric,cint
+* eventos: load,click,textchange,handles
+
+<b>Actividad</b>
+(ver sorteo3)[08]
+* Entrada de datos por combobox. Rellenar combobox.items. 
+* Debug.Print("hola:" & a)
+* Puntos de ruptura de depuración.
+* código: try..catch
+* ide: debug.print,inmediate window,breakpoint
+* controles: form,combobox,button
+
+<b>Actividad</b>
+(ver sorteo4)[05][08]
+* Cambiar la entrada de datos por inputbox
+* Almacenar los numeros que salen del sorteo en un combobox.
+* controles: combobox,label,textbox
+
+<b>Actividad</b>
+(ver sorteo5)[02][08]
+* Inicio desde main en module1. 
+* Realizar el sorteo usando solo messageBox e inputBox sin formulario.
+* controles: label,textbox,inputbox,MessageBox
+* código : module
+
+<b>Actividad</b>
+(ver EscribirArchivoTexto)[06][08]
+Aqui escribimos un programa (module, no form) que escriba y lea un archivo de texto. El mismo archivo se abrira dentro del proyecto de visual.net
+* código: StreamWriter
+
+<b>Actividad</b>
+(ver 4-3.sorteo6)[06][08][10]
+nota: Necesario conectar con la base de datos
+
+0:
+Crear dos formularios.
+Primer formulario con la entrada de datos y ejecutar el sorteo.
+Realizará el sorteo 100 veces, almacenar los resultados.
+Calcular cuantas veces sale cada numero y almacenar el resultado en un fichero de texto.
+Segundo formulario modal y presentar el contenido del archivo de texto.
+Usar arraylist.
+* controles: form,button,textbox,label,chart
+
+1:
+Establecer una conexion MySQL. Ver tema 4.5
+
+<b>Actividad</b> 
+(ver sorteo1)
+Ejemplo de sobreescribir el comportamiento de un evento.
+* anular el punto en la caja de entrada cancelando el evento (e.Handled = True)
+
+</pre></body>
+</html>

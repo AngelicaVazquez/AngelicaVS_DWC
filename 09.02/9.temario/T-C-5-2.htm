@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html><html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
+<head>
+	<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+	<meta http-equiv='expires' content='Tue, 01 Jan 1980 1:00:00 GMT'/>
+	<link rel='stylesheet' type='text/css' href='estilo.css' media='all'/> 
+</head>
+<body><pre>
+<b>Contenidos</b>
+Formularios. Envio. Recepcion en php.
+Controles en el formulario.
+Atributos para los formularios.
+Validar formularios.
+Guia de composición visual para formularios.
+
+<b>Referencias</b>
+[01] <a href='http://librosweb.es/xhtml/capitulo_8.html' target='_blank'>Formularios Básicos</a>
+[02] <a href='http://www.w3schools.com/html/html_forms.asp' target='_blank'>Formulario</a>
+[03] <a href='http://www.w3schools.com/html/html_form_elements.asp' target='_blank'>Elementos del formulario</a>
+[07] <a href='http://www.w3schools.com/html/html_form_attributes.asp' target='_blank'>Atributos del formulario</a>
+[08] <a href='https://developer.mozilla.org/es/docs/HTML/HTML5/Forms_in_HTML5' target='_blank'>Formularios en HTML5</a>
+[09] <a href='https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement' target='_blank'>Objeto HTMLFormElement</a>
+[10] <a href='http://librosweb.es/javascript/capitulo_7/validacion.html' target='_blank'>Validar en JavaScript</a>
+[11] <a href='https://www.w3schools.com/js/js_validation.asp' target='_blank'>Validacion de formulario</a>
+[12] <a href='http://www.odyniec.net/articles/multiple-select-fields/' target='_blank'>Selectores multiples avanzados</a>
+[14] <a href='http://www.w3schools.com/php/php_form_url_email.asp' target='_blank'>Validaciones en php</a>
+[15] <a href='https://www.alzado.org/articulo.php?id_art=408' target='_blank'>Composición visual</a>
+[16] <a href='https://medium.com/@juancaferraris/dise%C3%B1ando-formularios-m%C3%A1s-efectivos-estructura-inputs-labels-y-acciones-81ac011ea05f
+' target='_blank'>Diseñando Formularios más efectivos</a>
+[20] https://carlosazaustre.es/manejando-la-asincronia-en-javascript/
+[21] https://www.todojs.com/controlar-la-ejecucion-asincrona/
+[30] <a href='http://webdesign.tutsplus.com/es/tutorials/bring-your-forms-up-to-date-with-css3-and-html5-validation--webdesign-4738' target='_blank'>Pon al día tus formularios con validación de CSS3 y HTML5</a>
+[31] https://developer.mozilla.org/es/docs/Learn/HTML/Forms/Validacion_formulario_datos
+
+<b>Actividad</b>
+Como funciona un formulario [01][02][09]
+
+<b>Actividad</b>
+(ver ejemplosControles)
+Crear una pagina con ejemplos de controles de formulario [03]
+Añadir atributos para los formularios [07][08]
+
+<b>Actividad</b>
+Guia de composición visual para formularios [15][16]
+
+<b>Actividad</b>
+(ver formCssHtml5)
+Validar con html5 y css3. Crea este formulario siguiendo los pasos del articulo [30]
+nota:algun css puede no funcionar en firefox
+
+<b>Actividad</b>
+(ver phpGo2)
+Un ejemplo simple de cliente html a servidor php. Realizar el ejemplo.
+
+<b>Actividad</b>
+Validar HTML5 [08]. Validación de formulario [11]. Validacion js [10]. Validar en php [14]
+
+<b>Actividad</b>
+(ver formJs)
+Validación de formulario en js [31]
+
+<b>Actividad</b>
+(ver formulario.png)
+Diseño de formulario. Incluir al menos estas caracteristicas comunes a todas las versiones:
+- Usabilidad [15][16]
+- Placeholder
+- Pattern
+- Required
+- Submit
+- Reset
+- Validacion restringida
+- Aviso de errores de validación
+- Envio de los datos
+- Memoria 
+- Autofocus al primer campo
+- Tabindex de los controles
+- Indicar los campos requeridos al usuario por css con una imagen.
+- Borrar contenido de caja al hacer un click en ella y tb borrar el resumen de errores.
+- Caja en amarillo tanto si son datos opcionales con error o requeridos sin rellenar
+- Presentar un resumen de cuantos errores al enviar
+- Habilitar solo envio sino hay errores
+- Foco cambio de color de fondo
+
+<b>Actividad</b>
+(formulario0) 
+Version del formulario en html5 [07][08]
+
+<b>Actividad</b>
+(formulario1)
+Todo en javascript y css 
+- Cancelar la validación en HTML5, novalidate
+- Validaciones restringida en js capitulo7 de librosweb [10]: email,web,fijo,movil,fecha a los campos opcionales.
+- Valido/invlido por css :required :focus :valid :invalid
+
+<b>Actividad</b>
+(formulario2)
+Formulario en php. 
+- Mover las validacion del formulario de js a php.
+- Mantener el efecto memoria a los valores introducidos.
+
+<b>Actividad</b>
+(ver formulario3)
+Realizar una version del formulario usando solo los atributos y metodos del objeto form. Todo exclusivamente en js y css.
+- Implementar los requisitos comunes.
+- Anular la verificación del form hacerla por campos com checkvalidity.
+- Avisar al usuario al pulsar la tecla si el campo es valido.
+- No usar input type submit usar en cambio el evento submit del form.
+- No usar input type reset usar los elements del form para recorrerlos y vaciarlos.
+- Indicar la lista de requisitos implementados y como.
+- Exponer en clase.
+
+<b>Actividad</b>
+(ver trescajas js/php)(ver trescajas2 js/html)
+Crear un ejemplo para validaciones en js.
+- Se presentará al usuario tres cajas de texto.
+- Validar en la pulsacion de la tecla la entrada
+- Añadir ayuda en el atributo title.
+- Añadir informacion en placeholder.
+- Chequeos:
+.   clave : 6 caracteres
+.   email: debe existir @
+.   codigo postal: cinco digitos
+- Informar al usuario:
+.   Si la entrada tiene foco: borrar instrucciones
+.   Si entrada vacia: sin imagen
+.   Si entrada no pasa chequeos: imagen cruz
+.   Si entrada para chequeos: imagen check
+
+<b>Actividad</b>
+Usando formCssHtml5 y con validacion en HTML5 mejorar el formulario:https://es.wikipedia.org/wiki/Formulario_web#/media/ file:Sample_web_form.png
+Crear los elementos en html y gestionar en javascript la validacion y envio.
+1) Usaremos los mismos campos.
+2) Mejorar la composición del formulario siguiendo la guia de composición visual aplicando estilos [15]
+3) Usar div para maquetear con float, puntualmente position:relative.
+4) Determinar y reemplazar algún control por otros de un tipo mas adecuado.
+Añadir algunas especificaciones:
+-Mostrar al usuario los campos requeridos.
+-Ayuda al usuario con el formato de cada contenido.
+-Mostrar valores por defecto al pulsar limpiar en la primera carga.
+-Avisos, indicar en amarillo los campos requeridos que no pasen la validación.
+-Avisos, indicar en amarillo los opcionales rellenados que no pasen la validación.
+-Validaciones de todos los campos tanto opcionales como obligatorios.
+-Darle foco a la caja Nombre al cargar el formulario la primera vez.
+-Efecto memoria.
+-Validar en el submit del formulario.
+
+</pre></body>
+</html>

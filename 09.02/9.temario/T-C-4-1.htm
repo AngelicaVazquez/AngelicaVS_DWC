@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html><html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
+<head>
+	<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+	<meta http-equiv='expires' content='Tue, 01 Jan 1980 1:00:00 GMT'/>
+	<link rel='stylesheet' type='text/css' href='estilo.css' media='all'/> 
+</head>
+<body><pre>
+<b>Contenidos</b>
+* Timers
+* Object
+* Function
+* Classes
+
+<b>Referencias</b>
+[01] https://www.w3schools.com/js/js_object_definition.asp
+[02] https://www.w3schools.com/js/js_function_definition.asp
+[03] https://www.w3schools.com/cssref/pr_class_position.asp
+[04] https://www.w3schools.com/cssref/css_selectors.asp
+[05] https://purecss.io/
+[06] https://www.w3schools.com/js/js_class_intro.asp
+[07] https://www.w3schools.com/js/js_timing.asp
+[08] https://www.w3schools.com/html/html5_semantic_elements.asp
+[09] https://www.w3schools.com/css/css3_images.asp
+[10] https://www.w3schools.com/w3css/w3css_images.asp
+[11] https://www.w3schools.com/cssref/pr_class_display.asp
+[12] https://www.w3schools.com/cssref/tryit.asp?filename=trycss3_target_tab
+[14] https://stackoverflow.com/questions/18726480/embed-html5-youtube-video-without-iframe
+[15] https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/
+[16] https://developers.google.com/youtube/player_parameters?hl=es-419
+[17] https://www.w3schools.com/js/js_function_closures.asp
+[21] https://developers.google.com/youtube/v3/code_samples/javascript?hl=es (OAUTH2)
+[22] https://developers.google.com/apis-explorer/
+[23] https://developers.google.com/youtube/v3/docs/
+[24] https://developers.google.com/youtube/v3/docs/search/list
+[25] https://stackoverflow.com/questions/18681788/how-to-get-a-youtube-thumbnail-from-a-youtube-iframe
+[26] https://www.w3schools.com/css/css_grid.asp
+[27] https://www.w3schools.com/csS/css3_flexbox.asp
+[28] https://www.w3schools.com/css/css3_pagination.asp
+[29] https://console.cloud.google.com/iam-admin/quotas?project=natural-nimbus-259117&pli=1
+[30] https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp 
+[31] https://www.imdb.com/title/tt7504726/videoplayer/vi3213606681?ref_=vi_nxt_ap
+[40] https://www.w3schools.com/xml/ajax_intro.asp
+[41] https://www.w3schools.com/css/tryit.asp?filename=trycss_image_modal_js
+
+[] pildoras js basico 17,18,19 ; insercion video
+[] pildoras js 41 ; funciones anonimas
+
+<b>Actividad</b>
+(ver [02][01][06])
+funciones y objetos y clases.
+
+<b>Actividad</b>
+Uso de timers en javascript [07]
+
+<b>Actividad</b> <===
+(ver caracola)
+Usando setInterval y clearInterval [07] pintar y colorear div en la pantalla.
+* DW2E-caracola-expediente-ApellidosNombre.htm ; NOV19-2100 
+
+<b>Actividad</b>
+(ver modalVideo,modalVideoResponsive)
+Ejemplo de un video dentro de un modal.
+
+<b>Actividad</b>
+(ver videosParrilla)
+Hacer una parrilla de videos. Practicar los conceptos de clases, objetos, constructores, get, set, atributos
+
+Estructura de datos ==
+01) Crearemos una lista de objetos video instanciados de una clase. Crear las clases, encapsulacion de datos, set y get y constructores usando diferentes estrategias de javascript.
+02) El objeto video tendra los atributos: 
+- vid(cadena11),
+- título(char5),
+- duración(h/m/s),
+- fecha de subida(dd/mm/yyyy),
+- visitas(entero),
+- imagen(https://i.ytimg.com/vi/uWs5lsWXLbo/mqdefault.jpg). 
+03) Crea un metodo dentro de tus objetos que retorne el código HTML para imprimir la ficha. 
+04) Para estilizar la ficha, usar una clase ficha y acceso por selectores a los campos de la ficha.
+05) Comprueba por console.log si los atributos de tus objetos son privados y si los metodos get/set funcionan
+
+Layout de la pagina ==
+06) Crear una función que dibuje en un contenedor todas las fichas. Genera al azar las fichas entre 1 y 100 fichas.
+07) Crea el layout principal para tu página [03][08][26].
+08) Otra maquetacion puede ser maquetar el contenedor de fichas en horizontal con un scroll [11][27].
+
+Paginador ==
+09) Maqueta el contenedor de fichas con un paginador [27][28]
+10) Estilizar la ultima pagina activada
+11) Iniciar el paginador en la pagina uno
+
+Maquetar ==
+12) Añade otras forma de presentar las fichas con usar el scroll
+14) Usa pureCss para tu menu, filtros, botones, selectores [05]
+
+Filtros ==
+15) Filtro "todos" , si hay paginador presentar la primera pagina
+16) Filtro "primeras cinco fichas"
+17) Otros filtros y/o con parametros entre un mínimo y un máximo
+
+Ordenar ==
+18) Ordenar las fichas por sus campos titulo, subida, visitas, duracion
+19) Otras ordenaciones, ejemplo [31]
+
+Closure ==
+20) Crea un atributo que almacene las veces que el usuario visualizó cada ficha [17].
+
+Ficha y sus campos ==
+21) Usa para la ficha una sola clase (.ficha). Usa selectores para los contenido de ficha [04][09][10][25]. 
+
+Modal ==
+22) (ver modal)[41] Abrir un modal al hacer click en el video [12][15].
+23) Dentro del modal reproducir el video donde hiciste click [14][16].
+24) Simplificar el modal al maximo posible
+* DW2E-videos-expediente-ApellidosNombre.htm ; NOV30-2100 
+
+</pre></body>
+</html>
