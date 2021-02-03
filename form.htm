@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulario 3 por JavaScript</title>
+  <!--
+    + Placeholder
+    + Pattern
+    + Required
+    + Submit
+    + Reset
+    - Validacion restringida ???
+    + Aviso de errores de validación
+    - Envio de los datos ???
+    - Memoria ???
+    + Autofocus al primer campo
+    + Tabindex de los controles
+    + Indicar los campos requeridos al usuario por css con una imagen.
+    + Borrar contenido de caja al hacer un click en ella y tb borrar el resumen de errores.
+    - Caja en amarillo tanto si son datos opcionales con error o requeridos sin rellenar
+    + Presentar un resumen de cuantos errores al enviar
+    + Habilitar solo envio sino hay errores
+    - Foco cambio de color de fondo
+
+    - Implementar los requisitos comunes.
+    + Anular la verificación del form hacerla por campos com checkvalidity.
+    + Avisar al usuario al pulsar la tecla si el campo es valido.
+    + No usar input type submit usar en cambio el evento submit del form.
+    + No usar input type reset usar los elements del form para recorrerlos y vaciarlos.
+    - Indicar la lista de requisitos implementados y como.
+    - Exponer en clase.
+  -->
+  <style>
+    * {
+      font-family: system-ui, sans-serif;
+      box-sizing: border-box; 
+    }
+    body {
+      display: grid;
+      grid-template-areas: 'menu resumen' 'formulario resumen';
+      grid-gap: .5em;
+      grid-template-columns: 50% minmax(auto, 100%);
+    }
+    header {
+      grid-area: menu;
+      border: 1px solid gray;
+      border-radius: 5px;
+      text-align: center;
+    }
+    section {
+      grid-area: resumen;
+      border: 1px solid gray;
+      padding: 1em;
+      border-radius: 5px;
+    }
+    form {
+      width: 100%;
+      grid-area: formulario;
+      display: table;
+      border: 1px solid gray;
+      padding: 1em;
+      border-radius: 5px;
+      border-spacing: 1em .2em;
+    }
+    form div {
+      display: table-row;
+    }
+    div label:first-of-type {
+      display: table-cell;
+      text-align: right;
+    }
+    .required::after {
+      content: ' *';
+      color: red;
+      font-weight: bold;
+    }
+    input:invalid {
+      padding: 2px;
+      box-shadow: 0 0 5px #d45252;
+      border: 1px solid #b03535;
+    }
+    input:not([type="submit"]):focus:valid {
+      padding: 2px;
+      box-shadow: 0 0 10px #5cd053;
+      border: 1px solid #28921f;
+    }
+    input:focus:invalid {
+      background-image: url(data:image/png;base64,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);
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+      background-position: right;
+    }
+    input:focus:valid {
+      background-image: url(data:image/png;base64,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);
+      background-repeat: no-repeat;
+      background-size: auto 85%;
+      background-position: 99%;
+    }
+    .popup::before {
+      font-size: smaller;
+      margin-left: .5em;
+      margin-right: -2px;
+    }
+    .popup::after {
+      content: '¡Ojo!';
+      background-color: darkred;
+      color: white;
+      font-size: smaller;
+      padding: .2em;
+      border-radius: 3px;
+    }
+    .popup.invalido::before {
+      content: '\25C0';
+      color: darkred;
+    }
+    .popup.invalido::after {
+      content: '¡Ojo!';
+      background-color: darkred;
+    }
+    .popup.restaurado::before {
+      content: '\25C0';
+      color: darkgreen;
+    }
+    .popup.restaurado::after {
+      content: 'Reseteado';
+      background-color: darkgreen;
+    }
+  </style>
+  <script>
+    const formulario = {
+      tag: 'form',
+      novalidate: true,
+      content: [
+        {
+          tag: 'input',
+          label: "Usuario",
+          placeholder: "Usuario",
+          required: true,
+          autofocus: true,
+        },
+        {
+          tag: 'input',
+          type: 'password',
+          label: "Contraseña",
+          placeholder: "Contraseña",
+          required: true,
+          minLength: 8,
+        },
+        {
+          tag: 'input',
+          label: "DNI",
+          placeholder: "00000000A",
+          required: true,
+          pattern: /\d{8}-?[A-ZÑ]/,
+        },
+        {
+          tag: 'input',
+          type: 'email',
+          label: "Correo",
+          placeholder: "correo@ejemplo.com",
+        },
+        {
+          tag: 'input',
+          type: 'url',
+          label: "Página",
+          placeholder: "https://tu.pagina.web",
+        },
+        {
+          tag: 'input',
+          type: 'search',
+          label: "Búsqueda",
+          placeholder: "Busca aquí...",
+        },
+        {
+          tag: 'input',
+          label: "Comunidad",
+          placeholder: "Elige comunidad...",
+          list: "comunidades",
+          content: [
+            {
+              tag: 'datalist',
+              id: "comunidades",
+              content: [
+                { tag: 'option', innerText: "Andalucía" },
+                { tag: 'option', innerText: "Aragón" },
+                { tag: 'option', innerText: "Asturias" },
+                { tag: 'option', innerText: "Baleares" },
+                { tag: 'option', innerText: "Canarias" },
+                { tag: 'option', innerText: "Cantabria" },
+                { tag: 'option', innerText: "Castilla y León" },
+                { tag: 'option', innerText: "Castilla La Mancha" },
+                { tag: 'option', innerText: "Cataluña" },
+                { tag: 'option', innerText: "Ceuta" },
+                { tag: 'option', innerText: "Extremadura" },
+                { tag: 'option', innerText: "Galicia" },
+                { tag: 'option', innerText: "La Rioja" },
+                { tag: 'option', innerText: "Madrid" },
+                { tag: 'option', innerText: "Murcia" },
+                { tag: 'option', innerText: "Navarra" },
+                { tag: 'option', innerText: "País Vasco" },
+                { tag: 'option', innerText: "Melilla" },
+                { tag: 'option', innerText: "Valencia" },
+              ],
+            },
+          ],
+        },
+        {
+          tag: 'select',
+          label: "Buceo",
+          content: [
+            { tag: 'option', value: "", selected: true, innerText: "-" },
+            { tag: 'option', value: "PADI-OWD", innerText: "PADI-OWD" },
+            { tag: 'option', value: "PADI-AOWD", innerText: "PADI-AOWD" },
+            { tag: 'option', value: "PADI-ROWD", innerText: "PADI-ROWD" },
+            { tag: 'option', value: "PADI-DM", innerText: "PADI-DM" },
+            { tag: 'option', value: "PADI-INSTR", innerText: "PADI-INSTR" },
+            { tag: 'option', value: "CMAS-1E", innerText: "CMAS-1E" },
+            { tag: 'option', value: "CMAS-2E", innerText: "CMAS-2E" },
+            { tag: 'option', value: "CMAS-3E", innerText: "CMAS-3E" },
+            { tag: 'option', value: "INSTR-1EN1", innerText: "INSTR-1EN1" },
+            { tag: 'option', value: "INSTR-1EN2", innerText: "INSTR-1EN2" },
+            { tag: 'option', value: "INSTR-2EN3", innerText: "INSTR-2EN3" },
+            { tag: 'option', value: "INSTR-3EN3", innerText: "INSTR-3EN3" },
+            { tag: 'option', value: "INSTR-3EN4", innerText: "INSTR-3EN4" },
+            { tag: 'option', value: "INSTR-3EN5", innerText: "INSTR-3EN5" },
+            { tag: 'option', value: "INSTR-3EN6", innerText: "INSTR-3EN6" },
+            { tag: 'option', value: "Otros", innerText: "Otros" },
+          ],
+        },
+        {
+          tag: 'input',
+          type: 'date',
+          label: "Fecha",
+        },
+        {
+          tag: 'input',
+          type: 'datetime-local',
+          label: "Fecha local",
+        },
+        {
+          tag: 'input',
+          type: 'month',
+          label: "Mes",
+          disabled: true,
+        },
+        {
+          tag: 'input',
+          type: 'week',
+          label: "Semana",
+        },
+        {
+          tag: 'input',
+          type: 'time',
+          label: "Hora",
+        },
+        {
+          tag: 'input',
+          type: 'hidden',
+          label: "Oculto",
+        },
+        {
+          tag: 'input',
+          type: 'file',
+          label: "Archivo",
+        },
+        {
+          tag: 'input',
+          type: 'color',
+          label: "Color",
+          value: "#ddeeff",
+        },
+        {
+          tag: 'input',
+          type: 'number',
+          label: "Numero",
+          value: 2020,
+          min: 1900,
+          max: 2050,
+        },
+        {
+          tag: 'input',
+          type: 'range',
+          label: "Rango",
+          value: 50,
+          list: "rangos",
+          content: [
+            {
+              tag: 'datalist',
+              id: "rangos",
+              content: [
+                { tag: 'option', value: 0 },
+                { tag: 'option', value: 80 },
+                { tag: 'option', value: 100 },
+              ],
+            },
+          ],
+        },
+        {
+          tag: 'input',
+          type: 'tel',
+          label: "Teléfono",
+          pattern: /((\+|00)\s?\d{2}\s?)?[679](\d\s?){7}\d/,
+        },
+        {
+          tag: 'div',
+          label: "Radio",
+          content: [
+            {
+              tag: 'input',
+              type: 'radio',
+              label: "Radio-1",
+              name: "radio",
+              value: "radio-1",
+              checked: true,
+            },
+            {
+              tag: 'input',
+              type: 'radio',
+              label: "Radio-2",
+              name: "radio",
+              value: "radio-2",
+            },
+            {
+              tag: 'input',
+              type: 'radio',
+              label: "Radio-3",
+              name: "radio",
+              value: "radio-3",
+            },
+          ],
+        },
+        {
+          tag: 'input',
+          type: 'checkbox',
+          label: "Casilla",
+          value: 'on',
+          content: [
+            {
+              tag: 'span',
+              innerText: "Recordar",
+            },
+          ],
+        },
+        {
+          tag: 'input',
+          type: 'reset',
+          label: "Borrar",
+          value: "Borrar",
+        },
+        {
+          tag: 'input',
+          type: 'submit',
+          label: "Enviar",
+          value: "Enviar",
+        },
+      ],
+    };
+
+    function pintar({label, tag, content, ...attr}) {
+      const nodo = document.createElement(tag);
+      const div = document.createElement('div');
+      if (label) {
+        const id = label.replace(/\s+/g, "-").normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        nodo.id = id;
+        nodo.name = id;
+        const etiqueta = document.createElement('label');
+        etiqueta.innerText = label;
+        etiqueta.htmlFor = id;
+        div.appendChild(etiqueta);
+        div.appendChild(nodo);
+      }
+      if (content) {
+        for (const elem of content) {
+          // select es el único que requiere trato especial que queremos que content esté *dentro*
+          (label && tag !== 'select' ? div : nodo).appendChild(pintar(elem));
+        }
+      }
+      // el atributo list es de sólo lectura y referencia al nodo, la manera de introducir el
+      // atributo a través del id es con setAttribute();
+      const { list, ...attr2 } = attr;
+      Object.assign(nodo, attr2);
+      if (list) {
+        nodo.setAttribute('list', list);
+      }
+      if (label) {
+        return div;
+      }
+      return nodo;
+    }
+
+    // document.styleSheets.item(0).rules.item(0).style.color = 'red';
+    window.addEventListener('DOMContentLoaded', function() {
+      const form = document.forms.item(0);
+      const resumen = document.getElementById("resumen");
+      const reseteos = document.getElementById("reseteos");
+      const invalidos = document.getElementById("invalidos");
+      form.addEventListener('reset', (e) => {
+        e.preventDefault();
+        limpiar(form, reseteos)
+        borrar(form, reseteos)
+      });
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        limpiar(form, invalidos)
+        enviar(form, invalidos)
+      });
+
+      const lista = form.querySelector("input[type=text][list]");
+      lista.checkValidity = function() {
+        return this.list.querySelector(`option[value="${this.value}"]`) !== null;
+      };
+      lista.addEventListener('input', function() {
+        this.valid = this.list.querySelector(`option[value="${this.value}"]`) !== null;
+      });
+
+      form.querySelectorAll(":required").forEach(n => n.previousElementSibling.classList.add("required"));
+
+      // Generar formulario desde JSON
+      document.getElementById("generar-desde-json").addEventListener('click', () => {
+        document.forms.item(0).remove();
+        document.body.appendChild(pintar(formulario));
+        window.dispatchEvent(new CustomEvent('DOMContentLoaded'));
+      });
+
+      // Eliminar al entrar el focus
+      const resetearValor = function() {
+        this.value = this.defaultValue;
+      }
+      document.getElementById("eliminar-onfocus").addEventListener('change', function() {
+        if (this.checked) {
+          form.querySelectorAll("input").forEach(elem => {
+            elem.addEventListener('focus', resetearValor);
+          });
+        } else {
+          form.querySelectorAll("input").forEach(elem => {
+            elem.removeEventListener('focus', resetearValor);
+          });
+        }
+      });
+
+      // Añadir popup al momento
+      const autoPopupInvalido = function() {
+        popupInvalido(this, invalidos);
+      }
+      document.getElementById("popup-al-momento").addEventListener('change', function() {
+        for (const elem of form.elements) {
+          if (this.checked) {
+            elem.addEventListener('input', autoPopupInvalido);
+          } else {
+            elem.removeEventListener('input', autoPopupInvalido);
+          }
+        }
+      });
+    });
+
+    function limpiar(form, resumen) {
+      form.querySelectorAll(".popup").forEach(p => p.remove());
+      resumen.innerText = '';
+    }
+
+    function borrar(form, resumen) {
+      const lista = document.createElement('ol');
+
+      if (confirm("No uses ese botón, anda. ¿De verdad quieres borrar todo?")) {
+        for (const elem of form.elements) {
+          let restaurado = false;
+          if (elem.nodeName === 'SELECT') {
+            if (elem.value !== elem.options.item(0).value) {
+              elem.value = elem.options.item(0).value;
+              restaurado = true;
+            }
+          } else {
+            if (elem.checked !== elem.defaultChecked) {
+              elem.checked = elem.defaultChecked;
+              restaurado = true; 
+            } else if (elem.value !== elem.defaultValue) {
+              elem.value = elem.defaultValue;
+              restaurado = true;
+            }
+          }
+          if (restaurado) {
+            popup("restaurado", elem, lista, (etiqueta) => `<li>Campo “${etiqueta}” reseteado</li>`);
+          }
+        }
+        resumen.appendChild(lista);
+        if (!resumen.innerText) {
+          resumen.innerText = "Parece que el formulario estaba intacto.";
+        }
+      }
+    }
+
+    function enviar(form, resumen) {
+      const lista = document.createElement('ol');
+
+      for (const elem of form.elements) {
+        popupInvalido(elem, lista);
+      }
+      resumen.appendChild(lista);
+      if (!resumen.innerText) {
+        resumen.innerText = "Parece que podemos enviar el formulario.";
+      }
+    }
+
+    function popup(clase, elemento, escaparate, conversor) {
+      const popup = document.createElement('span');
+      popup.classList.add("popup", clase);
+      elemento.parentElement.insertAdjacentElement('beforeend', popup);
+      const etiqueta = document.querySelector(`label[for="${elemento.id}"]`);
+      if (etiqueta) {
+        escaparate.innerHTML += conversor(etiqueta.innerText);
+      }
+    }
+
+    function popupInvalido(elemento, escaparate) {
+      const posiblePopup = elemento.parentElement.querySelector(".popup");
+      if (posiblePopup) {
+        posiblePopup.remove();
+      }
+      if (!elemento.checkValidity()) {
+        popup("invalido", elemento, escaparate, (etiqueta) => `<li>Campo “${etiqueta}” no válido</li>`);
+      }
+    }
+  </script>
+</head>
+<body>
+
+<header>
+  <h2>Configuración</h2>
+  <p>
+    <input type="checkbox" name="popup-al-momento" id="popup-al-momento">
+    <label for="popup-al-momento">Popup al momento</label>
+    &nbsp;
+    <input type="checkbox" name="eliminar-onfocus" id="eliminar-onfocus">
+    <label for="eliminar-onfocus">Eliminar al hacer focus</label>
+    &nbsp;
+    <input type="button" name="generar-desde-json" id="generar-desde-json" value="Generar desde JSON">
+  </p>
+</header>
+
+<form novalidate>
+  <div>
+    <label for="usuario">Usuario</label>
+    <input type="text" name="usuario" id="usuario" placeholder="Usuario" required autofocus>
+  </div>
+  <div>
+    <label for="contrasena">Contraseña</label>
+    <input type="password" name="contrasena" id="contrasena" minlength="8" placeholder="Contraseña" required>
+  </div>
+  <div>
+    <label for="dni">DNI</label>
+    <input type="text" name="dni" id="dni" pattern="\d{8}-?[A-ZÑ]" placeholder="00000000A" required>
+  </div>
+  <div>
+    <label for="correo">Correo</label>
+    <input type="email" name="correo" id="correo" placeholder="correo@ejemplo.com">
+  </div>
+  <div>
+    <label for="pagina">Página</label>
+    <input type="url" name="pagina" id="pagina" placeholder="https://tu.pagina.web">
+  </div>
+  <div>
+    <label for="busqueda">Búsqueda</label>
+    <input type="search" name="busqueda" id="busqueda" placeholder="Busca aquí...">
+  </div>
+  <div>
+    <label for="comunidad">Comunidad</label>
+    <input type="text" name="comunidad" id="comunidad" list="comunidades" placeholder="Elige comunidad...">
+    <datalist id="comunidades">
+      <!-- <option>Andalucía</option>
+      <option>Aragón</option>
+      <option>Asturias</option>
+      <option>Baleares</option>
+      <option>Canarias</option>
+      <option>Cantabria</option>
+      <option>Castilla y León</option>
+      <option>Castilla La Mancha</option>
+      <option>Cataluña</option>
+      <option>Ceuta</option>
+      <option>Extremadura</option>
+      <option>Galicia</option>
+      <option>La Rioja</option>
+      <option>Madrid</option>
+      <option>Murcia</option>
+      <option>Navarra</option>
+      <option>País Vasco</option>
+      <option>Melilla</option>
+      <option>Valencia</option> -->
+      <option value="Andalucía"></option>
+      <option value="Aragón"></option>
+      <option value="Asturias"></option>
+      <option value="Baleares"></option>
+      <option value="Canarias"></option>
+      <option value="Cantabria"></option>
+      <option value="Castilla y León"></option>
+      <option value="Castilla La Mancha"></option>
+      <option value="Cataluña"></option>
+      <option value="Ceuta"></option>
+      <option value="Extremadura"></option>
+      <option value="Galicia"></option>
+      <option value="La Rioja"></option>
+      <option value="Madrid"></option>
+      <option value="Murcia"></option>
+      <option value="Navarra"></option>
+      <option value="País Vasco"></option>
+      <option value="Melilla"></option>
+      <option value="Valencia"></option>
+    </datalist>
+  </div>
+  <div>
+    <label for="buceo">Buceo</label>
+    <select id="buceo">
+      <option value="" selected>-</option>
+      <option value="PADI-OWD">PADI-OWD</option>
+      <option value="PADI-AOWD">PADI-AOWD</option>
+      <option value="PADI-ROWD">PADI-ROWD</option>
+      <option value="PADI-DM">PADI-DM</option>
+      <option value="PADI-INSTR">PADI-INSTR</option>
+      <option value="CMAS-1E">CMAS-1E</option>
+      <option value="CMAS-2E">CMAS-2E</option>
+      <option value="CMAS-3E">CMAS-3E</option>
+      <option value="INSTR-1EN1">INSTR-1EN1</option>
+      <option value="INSTR-1EN2">INSTR-1EN2</option>
+      <option value="INSTR-2EN3">INSTR-2EN3</option>
+      <option value="INSTR-3EN3">INSTR-3EN3</option>
+      <option value="INSTR-3EN4">INSTR-3EN4</option>
+      <option value="INSTR-3EN5">INSTR-3EN5</option>
+      <option value="INSTR-3EN6">INSTR-3EN6</option>
+      <option value="Otros">Otros</option>
+    </select>
+  </div>
+  <div>
+    <label for="fecha">Fecha</label>
+    <input type="date" name="fecha" id="fecha">
+  </div>
+  <div>
+    <label for="fecha-local">Fecha local</label>
+    <input type="datetime-local" name="fecha-local" id="fecha-local">
+  </div>
+  <div>
+    <label for="mes">Mes</label>
+    <input type="month" name="mes" id="mes" disabled>
+  </div>
+  <div>
+    <label for="semana">Semana</label>
+    <input type="week" name="semana" id="semana">
+  </div>
+  <div>
+    <label for="hora">Hora</label>
+    <input type="time" name="hora" id="hora">
+  </div>
+  <div>
+    <label for="oculto">Oculto</label>
+    <input type="hidden" name="oculto" id="oculto">
+  </div>
+  <div>
+    <!-- <label for="envio">Envio</label> -->
+    <!-- <input type="image" name="envio" id="envio" src="" alt=""> -->
+  </div>
+  <div>
+    <label for="archivo">Archivo</label>
+    <input type="file" name="archivo" id="archivo">
+  </div>
+  <div>
+    <label for="color">Color</label>
+    <input type="color" name="color" id="color" value="#ddeeff">
+  </div>
+  <div>
+    <label for="numero">Numero</label>
+    <input type="number" name="numero" id="numero" value="2020" min="1900" max="2050">
+  </div>
+  <div>
+    <label for="rango">Rango</label>
+    <input type="range" name="rango" id="rango" list="rangos" value="50">
+    <datalist id="rangos">
+      <option value="0">
+      <option value="80">
+      <option value="100">
+    </datalist>
+  </div>
+  <div>
+    <label for="telefono">Teléfono</label>
+    <input type="tel" name="telefono" id="telefono" pattern="((\+|00)\s?\d{2}\s?)?[679](\d\s?){7}\d">
+  </div>
+  <div>
+    <label>Radio</label>
+    <input type="radio" name="radio" id="radio-1" value="radio-1" checked>
+    <label for="radio-1">Radio-1</label>
+    <input type="radio" name="radio" id="radio-2" value="radio-2">
+    <label for="radio-1">Radio-2</label>
+    <input type="radio" name="radio" id="radio-3" value="radio-3">
+    <label for="radio-1">Radio-3</label>
+  </div>
+  <div>
+    <label>Casilla</label>
+    <input type="checkbox" name="recordar" id="recordar" value="on"><!-- trampilla -->
+    <label for="recordar">Recordar</label>
+  </div>
+  <div>
+    <label for="borrar">Borrar</label>
+    <input type="reset" name="borrar" id="borrar" value="Borrar">
+  </div>
+  <div>
+    <label for="enviar">Enviar</label>
+    <input type="submit" name="enviar" id="enviar" value="Enviar">
+  </div>
+</form>
+
+<section id="resumen">
+  <h2>Inválidos</h2>
+  <div id="invalidos"></div>
+  <h2>Reseteos</h2>
+  <div id="reseteos"></div>
+</section>
+
+</body>
+</html>
