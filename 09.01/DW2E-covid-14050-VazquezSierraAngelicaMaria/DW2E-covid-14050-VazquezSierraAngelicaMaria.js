@@ -13584,10 +13584,9 @@ ejemplo de :
 -tilelayer: grises y colores
 */
 
-document.addEventListener("DOMContentLoaded", function(event) {
-// grupo de la capas ciudades con 4 marcadores
+document.addEventListener("DOMContentLoaded", function() {
+
 var cities = L.layerGroup();
-//L.marker([35.7,139.6]).bindPopup('Tokio').addTo(cities);
 
 // una capa de mapa de statem
 var blanco=L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
@@ -13596,7 +13595,12 @@ var blanco=L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}
   minZoom: 0,
   maxZoom: 20,
   ext: 'png'
-})
+});
+
+/*L.control.attribution({
+  position: 'topright'
+}).addTo(map);*/
+
 
 // crear el mapa
 var map = L.map('covidMap', {
@@ -13629,4 +13633,106 @@ function getColor(a){
       return '#FFFFFF';
   }
 }
+
+var circulo=L.circle([30,110],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo.setRadius(100000);
+
+var circulo2=L.circle([15,105],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo2.setRadius(100000);
+
+var circulo3=L.circle([5,101],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo3.setRadius(100000);
+
+var circulo4=L.circle([33,101],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo4.setRadius(500000);
+
+var circulo5=L.circle([29,93],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo5.setRadius(50000);
+
+var circulo6=L.circle([30,90],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo6.setRadius(10000);
+
+var circulo7=L.circle([20,105],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo7.setRadius(10000);
+
+var circulo8=L.circle([8,80],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo8.setRadius(50000);
+
+var circulo9=L.circle([-20,130],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo9.setRadius(10000);
+
+var circulo14=L.circle([30,100],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo14.setRadius(70000);
+
+var circulo10=L.circle([29,84],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo10.setRadius(80000);
+
+var circulo11=L.circle([35,95],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo11.setRadius(30000);
+
+var circulo12=L.circle([30,105],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo12.setRadius(30000);
+
+var circulo13=L.circle([36,129],50000,{
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5
+}).addTo(map);
+circulo13.setRadius(20000);
+
+	
+
+
 });
