@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Formulario</title>
+    <link rel="stylesheet" media="screen" href="DW2E-formulario-14050-VazquezSierraAngelicaMaria.css" >
+</head>
+<body>
+    <div id="container">
+    <form class="form" action="" method="post" name="form">
+        <div>
+             <h2>Information about you</h2>
+             <p class="required_notification">* Required field</p>
+        </div>
+        <div class="floatingLabel">
+            <input type="text" name="name" placeholder="Name" size="46" autofocus required pattern="([A-Za-z-]+)"/>
+            <label for="name">Name</label>
+            <span class="form_hint">Only letters and dashes (-) allowed</span>
+        </div>
+        <div>
+            <p>Sex</p>
+            <input type="radio" id="male" name="gender" value="male"><label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female"><label for="female">Female</label>
+            <input type="radio" id="other" name="gender" value="other"><label for="other">Other</label>
+        </div>
+        <div>
+            <p>Eye colour</p>
+            <input type="radio" id="green" name="eyes" value="green"><label for="green">Green</label>
+            <input type="radio" id="blue" name="eyes" value="female"><label for="blue">Blue</label>
+            <input type="radio" id="brown" name="eyes" value="brown"><label for="brown">Brown</label>
+            <input type="radio" id="heterochromia" name="eyes" value="heterochromia"><label for="heterochromia">Heterochromia</label>
+        </div>
+        <div>
+            <p>Check all that apply</p>
+            <input type="checkbox" name="feet" id="feet"><label for="feet">Over 6 feet tall</label>
+            <input type="checkbox" name="pounds" id="pounds"><label for="pounds">Over 200 pounds</label>
+
+        </div>
+        <div class="floatingLabel2">
+            <textarea cols="40" rows="5" name="message" placeholder="Describe your athletic ability" required></textarea>
+            <label for="message">Describe your athletic ability:</label>
+        </div>
+        <div>
+            <button class="submit" type="submit">Enter my information</button>
+        </div>
+    </form>
+    </div>
+</body>
+</html>
