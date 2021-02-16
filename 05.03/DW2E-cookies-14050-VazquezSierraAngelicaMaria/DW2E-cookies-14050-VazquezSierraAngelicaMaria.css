@@ -1,0 +1,12 @@
+.contenedor {
+    border:rgb(97, 179, 97) 2px solid;
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: max-content;
+}
+.boton {
+    background-image: linear-gradient(green, rgb(97, 179, 97), green);
+    border-radius: 5px;
+    font-size: large;
+    margin-top: 2rem;
+}
