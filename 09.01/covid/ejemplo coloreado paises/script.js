@@ -13649,7 +13649,7 @@ L.geoJSON(countries, {
 function getColor(a){
 // personalizar los colores segun el pais:
 // españa azul , china rosa
-  if (a=='ESP'){        return '#0BC';
+  if (a=='ESP' || a=='AFG'){        return '#0BC';
   }else if (a=='CHN'){  return 'pink';
   }else{                return '#D3D3D3';
   }

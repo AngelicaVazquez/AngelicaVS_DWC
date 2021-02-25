@@ -13588,15 +13588,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 var cities = L.layerGroup();
 
-// una capa de mapa de statem
-var blanco=L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  subdomains: 'abcd',
-  minZoom: 0,
-  maxZoom: 20,
-  ext: 'png'
-});
-
 /*L.control.attribution({
   position: 'topright'
 }).addTo(map);*/
@@ -13606,12 +13597,24 @@ var blanco=L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}
 var map = L.map('covidMap', {
   center: [30, 110], // punto central del mapa
   zoom: 5, // nivel de zoom
-  layers: [blanco,cities] // capas iniciales del mapa
+  layers: cities // capas iniciales del mapa
 });
 
 // añadir estilos por zonas usando geoJSON
 // tb a cada zona un popup
 // tb personalizar con funciones(getColor) las zonas
+
+function getColor(a){
+  // personalizar los colores segun el pais:
+    if (a=='CHN' || a=='JPN' || a=='TWN' || a=='NPL' || a=='VNM' || a=='MYS' || a=='KHM' || a=='THA' || a=='LKA' || a=='KOR' || a=='AUS')
+    {
+      var colorInput = document.getElementById("color");
+      var color = colorInput.value;
+        return color;
+    }else{
+        return '#FFFFFF';
+    }
+  }
 L.geoJSON(countries, {
   style: function(feature) {
     return {
@@ -13624,115 +13627,8 @@ L.geoJSON(countries, {
   }
 }).addTo(map);
 
-function getColor(a){
-// personalizar los colores segun el pais:
-  if (a=='CHN' || a=='JPN' || a=='TWN' || a=='NPL' || a=='VNM' || a=='MYS' || a=='KHM' || a=='THA' || a=='LKA' || a=='KOR' || a=='AUS' || a=='ESP')
-  {
-      return 'pink';
-  }else{
-      return '#FFFFFF';
-  }
-}
 
-var circulo=L.circle([30,110],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo.setRadius(100000);
 
-var circulo2=L.circle([15,105],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo2.setRadius(100000);
-
-var circulo3=L.circle([5,101],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo3.setRadius(100000);
-
-var circulo4=L.circle([33,101],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo4.setRadius(500000);
-
-var circulo5=L.circle([29,93],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo5.setRadius(50000);
-
-var circulo6=L.circle([30,90],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo6.setRadius(10000);
-
-var circulo7=L.circle([20,105],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo7.setRadius(10000);
-
-var circulo8=L.circle([8,80],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo8.setRadius(50000);
-
-var circulo9=L.circle([-20,130],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo9.setRadius(10000);
-
-var circulo14=L.circle([30,100],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo14.setRadius(70000);
-
-var circulo10=L.circle([29,84],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo10.setRadius(80000);
-
-var circulo11=L.circle([35,95],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo11.setRadius(30000);
-
-var circulo12=L.circle([30,105],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo12.setRadius(30000);
-
-var circulo13=L.circle([36,129],50000,{
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(map);
-circulo13.setRadius(20000);
-
-	
-
+//DNS, deplegar app LAMP (apache) realizar conexión BBDD (pract 4.1/4.2), cuestiones cortas de tomcat. Unidades 3(a partir 3.3 incluida),4,5
 
 });
