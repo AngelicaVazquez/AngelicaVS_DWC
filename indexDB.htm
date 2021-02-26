@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>almacenamiento</title>
+</head>
+<body>
+    <script>
+   
+        //window.onload=leerCookie();
+        //window.onload=leerDatosSessionStorage();
+        //window.onload=leerDatosLocalStorage();
+        window.onload=crearBaseDeDatos();
+        /*Cookie*/
+        function crearCookie(valor)
+        {
+            var fecha = new Date();
+            var minutes = 30;
+            fecha.setTime(fecha.getTime() + (minutes*60*1000));
+            var expira = "expires="+fecha.toUTCString();
+            document.cookie = "Edad=" + valor + ";" + expira + ";path=/";
+        }
+        function obtenerCookie(nombreCookie)
+        {
+            var name = nombreCookie + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        function leerCookie()
+        {
+            var edad = obtenerCookie("Edad");
+            if (edad != "") {
+                alert("Tienes " + edad);
+            } else {
+                edad = prompt("Introduce tu edad:", "");
+                if (edad != "" && edad != null) {
+                crearCookie(edad);
+                    }
+                }
+        }
+
+        /*Web-Storage*/
+            /*Local Storage*/
+                function crearLocalStorage(valor)
+                {
+                    localStorage.setItem('correo', valor);
+                }
+                function leerDatosLocalStorage()
+                {
+                    var valorLocalStorage = localStorage.getItem('correo');
+                    if (valorLocalStorage != null) {
+                        alert("Tu correo es " + valorLocalStorage);
+                    } else {
+                        valorLocalStorage = prompt("Introduce tu correo:", "");
+                        if (valorLocalStorage != "" && valorLocalStorage != null) {
+                            crearLocalStorage(valorLocalStorage);
+                            }
+                        }
+                }
+            /*Session Storage*/
+                function crearSessionStorage(valor)
+                {
+                    sessionStorage.setItem('nombreUsuario', valor);
+                }
+                function leerDatosSessionStorage()
+                {
+                    var valorSessionStorage = sessionStorage.getItem('nombreUsuario');
+                    if (valorSessionStorage != null) {
+                        alert("Tu nombre de usuario es " + valorSessionStorage);
+                    } else {
+                        valorSessionStorage = prompt("Introduce tu nombre de usuario:", "");
+                        if (valorSessionStorage != "" && valorSessionStorage != null) {
+                            crearSessionStorage(valorSessionStorage);
+                            }
+                        }
+                }
+        /*IndexedDB*/
+        function crearBaseDeDatos()
+        {
+            let bd;
+            let bdRequest = indexedDB.open('MisLibros',1);
+            bdRequest.onupgradeneeded = function(evento)
+            {
+                console.log('onupgradeneeded');
+                bd = evento.target.result;
+                let books = bd.createObjectStore('books', {autoIncrement:true});
+            }
+            bdRequest.onsuccess = function(evento)
+            {
+                console.log('onsuccess');
+                bd = evento.target.result;
+                leerBaseDeDatos(bd);
+            }
+            bdRequest.onerror = function(evento) {
+                console.log('onerror');
+                alert('error al abrir la base de datos: ' + evento.target.errorCode);
+            }
+        }
+        function leerBaseDeDatos(bd)
+        {
+            var botonAnadir = document.createElement("button");
+            document.body.innerHTML="Apretar boton para crear base de datos, añadir libro y guardarlo en la base de datos";
+            
+            botonAnadir.innerHTML = "Añadir Libro";
+            document.body.appendChild(botonAnadir);
+            botonAnadir.addEventListener("click",function(){
+                
+                let tx = bd.transaction(['books'],'readwrite');
+                let guardado = tx.objectStore('books');
+                let nuevoLibro = prompt("Introduce el nombre del nuevo libro:", "");
+                let book = {name: nuevoLibro};
+                guardado.add(book);
+                tx.oncomplete = function() {console.log('stored note!')};
+                tx.onerror = function(event)
+                {
+                    alert(event.target.errorCode);
+                }
+
+            },bd);
+        }
+    </script>
+</body>
+</html>

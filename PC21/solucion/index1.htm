@@ -1,0 +1,328 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>bookmark</title>
+<style>
+:root{
+	--negro: 2px solid #aaa;
+}
+.estructuraPrincipal{
+	border: var(--negro);
+	width: 280px;
+	float: left;
+	margin: 10px;
+}
+div{
+	border-radius: 6px;
+}
+.elementoDato{
+	background-color: LemonChiffon;
+}
+.elementoComando{
+	background-color: DarkSeaGreen;
+}
+.elementoTitulo{
+	background-color: LightBlue;
+}
+.estructuraElemento{
+	height: 32px;
+	margin: 4px;
+	padding: 2px;
+}
+*{
+	box-sizing: border-box;
+}
+.elementoComando:hover,.elementoDato:hover{
+	border: var(--negro);
+	cursor: pointer;
+}
+.centrado{
+  display: flex;
+  justify-content: center;	
+  flex-direction: column;
+  align-items: center;
+}
+label {
+	display: inline-block;
+	width: 70px;
+}
+input {
+	width: 194px;
+}
+</style>	
+<script>
+/*
+
+estructura :
+-contenedores: principal > paneles > elementos  
+-elememtos: titulo,comandos,entrada,datos,papelera
+-datos: bookmark,etiquetas
+
+*/
+
+const defN='bookmark';
+const defL='etiqueta';
+const cmdAdd='[+]';
+const titulo=['BOOKMARKS','CONTENIDO','ETIQUETAS'];	
+const labels=['0;1;2;3','4;5;6','7;9','1;2;3;4;5']; // una lista para cada bookmark
+const comun='estructuraElemento centrado';
+var lastBM=1; // siguiente numero de bookmark para crear 
+var lastLabel=1; // siguiente numero para crear de un label
+var activoBM=1; // ultimo bookmark activado
+window.onload=principal;
+
+function principal(){
+	creaTodo(titulo,labels);
+}
+function creaTodo(titulo,labels){
+	
+	// contenedor principal
+	crearNodo(document.body,'div','estructuraPrincipal0','principal','');
+	for ( var k=0;k<titulo.length;k++ ){
+		crearNodo(getId('principal'),'div','estructuraPrincipal',titulo[k],'');
+	}
+	var lista=getId('principal').childNodes; // [nota2] hijos de un nodo
+
+	// panel 0 : 
+	var index=0,x=lista[index];
+	crearNodo(x,'div',comun+' elementoTitulo','',titulo[index]);
+	var ele=crearNodo(x,'div',comun+' elementoComando','',cmdAdd);
+	ele.onclick=clickAddBookM;
+	crearElementosBook(x,4,labels);
+	crearZonaDrop(x);
+	
+	// panel 1 :
+	var index=1,x=lista[index];
+	x.dataset.previo='B'+activoBM; // enlace de contenidos con el bookmark activo
+	crearNodo(lista[1],'div',comun+' elementoTitulo','',titulo[index]);
+	var bm=getId('B'+activoBM);
+	crearNNodos(x,3,'D','',false);
+	var L2=x.childNodes; // [nota2]	
+	crearEntradaTxt(L2[1],'titulo',bm.dataset.titulo);
+	crearEntradaTxt(L2[2],'url',bm.dataset.url);
+	crearEntradaTxt(L2[3],'descripcion',bm.dataset.descripcion);
+	crearLabelContenidos(x,bm.dataset.d.split(';'));
+	crearZonaDrop(x);
+	
+	// panel2 :
+	var index=2,x=lista[index];
+	crearNodo(x,'div','estructuraElemento elementoTitulo centrado','',titulo[index]);
+	var ele=crearNodo(x,'div',comun+' elementoComando','',cmdAdd);
+	ele.onclick=clickAddLabel;
+	lastLabel=9;
+	crearNNodos(x,lastLabel,'L',defL,true);
+	crearZonaDrop(x);
+}
+function crearLabelContenidos(contenedor,lista){
+	for (j=0;j<lista.length;j++){
+		var ele=crearElementoDato(contenedor,'C'+lista[j],defL+' '+(parseInt(lista[j])+1),true);
+	}
+}
+function crearNNodos(contenedor,n,p1,p2,dg){
+	for (j=0;j<n;j++){
+		var ele=crearElementoDato(contenedor,p1+j,p2+' '+(j+1),dg);
+	}
+}
+function crearElementoDato(contenedor,id,inner,dg){
+	var ele=crearNodo(contenedor,'div',comun+' elementoDato',id,inner);
+	ele.draggable=dg;
+	ele.ondragstart=dragstartBM;
+	return ele;
+}
+function crearEntradaTxt(contenedor,id,valor){
+	contenedor.innerHTML='';
+	contenedor.className='estructuraElemento';
+	var a=crearNodo(contenedor,'label','','',id.substr(0,6)+' ');
+	a.setAttribute('for',id);
+	var b=crearNodo(contenedor,'input','','','');
+	b.setAttribute('type','text');
+	b.setAttribute('placeholder',id);
+	b.setAttribute('id',id);
+	b.value=valor;
+	b.onkeyup=keyupEntrada;
+}
+function crearZonaDrop(contenedor){
+	var ele=crearNodo(contenedor,'div','estructuraElemento centrado','','[ DROP ]');
+	ele.id='P-'+contenedor.id;
+	ele.ondrop=dropBM;
+ 	ele.ondragenter=dragenterBM;
+ 	ele.ondragleave=dragleave;
+	ele.ondragover=dragoverBM;
+}
+function crearElementosBook(contenedor,n,labels){
+	for (var j=1;j<n;j++){
+		crearUnBookM(contenedor,'B',defN+' '+j,labels[j-1]);
+	}	
+}
+function crearUnBookM(contenedor,id,inner,labels){
+	var d=id+lastBM;
+	lastBM++;
+	var ele=crearNodo(contenedor,'div','estructuraElemento elementoDato centrado',d,inner);
+	ele.dataset.titulo=d; // [nota4] creacion de atributos de usuario con dataset
+	ele.dataset.url='la url de '+d;
+	ele.dataset.descripcion='descripcion de '+d;
+	ele.dataset.d=labels;
+	ele.draggable=true;
+	ele.ondragstart=dragstartBM;
+	ele.onclick=clickBook;		
+	return ele;
+}
+function crearNodo(ancestro,tipo,clase,id,inner){
+	var ele=document.createElement(tipo);
+	ancestro.appendChild(ele);
+	if (clase!=''){ele.className=clase}
+	if (id!=''){ele.id=id}
+	ele.innerHTML=inner;
+	return ele;
+}
+function getId(a){
+	return document.getElementById(a);
+}
+</script>
+
+<script>
+/*
+
+BLOQUE2: funcionalidad
+
+*/
+function addLabelLista(ele){
+	var destino=getId('B'+activoBM);
+	var lista=destino.dataset.d.split(';');
+	if (lista[0]==''){lista.length=0;}
+	var dato=ele.id.substr(1);
+	if (lista.indexOf(dato)==-1){ // [nota3] no añadir elementos repetidos
+		lista.push(dato);
+	}
+	lista.sort(function(a,b){return a-b}); // [nota2] sort numerico cuidado
+	destino.dataset.d=lista.join(';');
+	console.log('add:',ele,activoBM,lista);	
+}
+function eliminarLabelLista(ele,nl){
+	var lista=ele.dataset.d.split(';');
+	if (lista.indexOf(nl)!=-1){
+		lista.splice(lista.indexOf(nl),1); // [nota5] eliminar elemento del array no dejar el hueco
+		ele.dataset.d=lista.join(';');
+	}
+}
+function keyupEntrada(){
+	console.log('DD:',this.id,this.value,this.parentNode.parentNode.dataset.previo);
+	var ele=getId(this.parentNode.parentNode.dataset.previo);
+	ele.setAttribute('data-'+this.id,this.value); // [nota1]
+}
+function clickBook(){
+	console.log('clickBook:',this.id,this.dataset.d);
+	activoBM=this.id.substr(1);
+	console.log('activoBM:',this);
+	pintaBM(this);
+} 
+function pintaBM(ele){
+	getId('titulo').value=ele.dataset.titulo;
+	getId('url').value=ele.dataset.url;
+	getId('descripcion').value=ele.dataset.descripcion;
+	
+	// borrar nodos
+	var contenedor=getId('CONTENIDO');
+	contenedor.dataset.previo=ele.id;
+	var l2=contenedor.childNodes;
+	var lon=l2.length-3; // nodo para borrar
+	//console.log('nodos: ',lon,l2);
+	for ( k=1;k<lon;k++ ){
+		var nodo=l2[l2.length-1];
+		//console.log('k:',k,nodo);
+		nodo.parentNode.removeChild(nodo);		
+	}
+	var l3=ele.dataset.d.split(';');
+	if (l3.length>0&&l3[0]!=''){
+		crearLabelContenidos(contenedor,l3);
+	}
+	crearZonaDrop(contenedor);
+}
+function labelAddContenido(){
+	var contenedor=getId('CONTENIDO');
+	crearZonaDrop(contenedor);
+}
+function clickAddBookM(){
+	var lista=this.parentNode.childNodes; // lista donde estoy
+	var lon=lista.length;
+//	this.parentNode.removeChild(lista[lon-1]);	// o tambien
+	this.parentNode.removeChild(this.parentNode.lastChild);	
+	//var z=defN+(lon-2); // penultimo
+	crearUnBookM(this.parentNode,'B',defN+' '+lastBM,'0;1;9');
+	// tambien:	this.parentNode.insertBefore(this.parentNodea.lastChild);	
+	crearZonaDrop(this.parentNode);
+}
+function clickAddLabel(){
+	var lista=this.parentNode.childNodes; // lista donde estoy
+	var lon=lista.length;
+	this.parentNode.removeChild(this.parentNode.lastChild);	
+	crearElementoDato(this.parentNode,'L'+lastLabel,defL+' '+(lastLabel+1),true);
+	lastLabel++;
+	crearZonaDrop(this.parentNode);
+}
+function dragleave(e){
+	// reset si se ilumino una zona valida
+	this.style.backgroundColor='White';
+}
+function dragenterBM(e){
+	// iluminar si es una zona valida de drop
+	e.preventDefault();
+	var d=e.dataTransfer.getData("text");
+	var ele=getId(d);
+	var p=ele.parentNode;
+	if ((p.id=='ETIQUETAS'&&this.id.substr(2)=='CONTENIDO')||(p.id==this.id.substr(2))){
+		this.style.backgroundColor='Gainsboro';
+	} 	
+}
+function dragstartBM(e){
+	e.dataTransfer.setData("text",e.target.id);
+	console.log('start:',e.target.id);
+}
+function dragoverBM(e){
+	e.preventDefault();
+	/* By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element */
+}
+function dropBM(e){
+	e.preventDefault();
+	var d=e.dataTransfer.getData("text");
+	var ele=getId(d);
+	var p=ele.parentNode;
+	this.style.backgroundColor='White';
+	if (p.id=='ETIQUETAS'&&this.id.substr(2)=='CONTENIDO'){
+		// añadir un label a contenidos y refrescar contenidos
+		addLabelLista(ele);
+		pintaBM(getId('B'+activoBM));
+		return;
+	}
+	if (p.id!=this.id.substr(2)){return;} // drag en otro drop salimos
+	p.removeChild(ele);	// borrar el elemento dragado
+	if (d[0]=='C'){
+		// si es eliminar C borrar de la lista del bookmak el label		
+		// 0;1;2;3  --> borrar 1 --> 0;2;3
+		eliminarLabelLista(getId(p.dataset.previo),d.substr(1));
+	}
+	if (d[0]=='L'){
+		// se borro un label eliminarlo de todas las lista
+		// refresacar contneidos por si estaba alli
+/* 
+[nota1] podemos seleccionar los div hijos de un contendor
+que tengan un atributo de usuario dado, este puede ser una variable si hemos creado los atributos con dataset ya que aparecen en el html y se pueden acceder con querySelector o setAttribute. En el domo son dataset.atributo en html data-atributo.
+*/
+
+		var lista=getId('BOOKMARKS').querySelectorAll('div[data-d]');
+		for ( x of lista){
+			eliminarLabelLista(x,d.substr(1));
+		}
+		pintaBM(getId('B'+activoBM));
+	}
+}
+</script>
+
+</head>
+ 
+<body>
+</body>
+
+</html>
