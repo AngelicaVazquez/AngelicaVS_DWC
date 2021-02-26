@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Caracola</title>
+
+    <style>
+        #0{
+            float: left;
+        }
+    </style>
+
+    <script>
+
+        
+        var fibonacci = [1,1,2,3,5,8,13,21,34];
+        fibonacci.reverse();
+        var c=0;
+
+        function iniciar() {
+           /* fibonacci.forEach(i => {
+                elemento(i);
+                c++;
+            }); */
+
+            for (let index = 1; index < fibonacci.length; index+=2) {
+                elemento(fibonacci[index], fibonacci[index-1]);
+                c++;
+            }
+        }
+
+        function elemento(lado,lado2) {
+            var randomColor = Math.floor(Math.random()*16777215).toString(16);
+            var elem=document.createElement('div');
+            elem.style.backgroundColor='#'+randomColor;
+            elem.id=c;
+            elem.style.width=lado+"rem";
+            elem.style.height=lado+"rem";
+                if(c==0){
+                    document.body.append(elem);
+                }else{
+                document.getElementById(c-1).append(elem); 
+                }
+        }
+        window.onload = iniciar; 
+    </script>
+</head>
+<body>
+</body>
+</html>

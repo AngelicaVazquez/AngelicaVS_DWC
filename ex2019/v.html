@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>videos</title>
+    <style>
+        *{
+        font-family: Arial, Helvetica, sans-serif;
+        color: blue;
+        }
+
+        #contenedor{
+            width: 15vw;
+            height: 25rem;
+            display: flex;
+            flex-direction: column;
+        }
+        #contenedor > *{
+            margin: 0.2rem;
+            border: solid 3px rgb(177, 177, 177);
+        }
+
+        #listas{
+            height: 35%;
+            resize: none;
+        }
+
+        #iniciar{
+            height: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #iniciar:hover{
+            background-color: red;
+            cursor: pointer;
+        }
+
+        #barras{
+            height: 35%;
+            display: flex;
+            flex-direction: column;
+        }
+        #barras div {
+          flex: 1;
+          border-right: 2px solid gray;
+          background-color: lightgray;
+          margin: 2px;
+          transition: all 0.60s;
+        }
+
+        #botones{
+            height: 15%;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+    </style>
+    <script>
+    function cargar() {
+        //Contenedor principal
+        var contenedor = document.createElement('div');
+        contenedor.id = "contenedor";
+        document.body.appendChild(contenedor);
+
+        //Contenedor textarea
+        var listas = document.createElement('textarea');
+        listas.id = "listas";
+        listas.innerHTML="1,1,2,3,4,99\n30,40,50,60,20,30\n90,10,80,70,62,99"
+        document.getElementById("contenedor").append(listas);
+
+        //Contenedor botón iniciar
+        var iniciar = document.createElement('div');
+        iniciar.id = "iniciar";
+        iniciar.innerHTML="run";
+        iniciar.addEventListener("click",mostrar);
+        document.getElementById("contenedor").append(iniciar);
+
+        //Contenedor barras
+        var barras = document.createElement('div');
+        barras.id = "barras";
+        document.getElementById("contenedor").append(barras);
+
+        //Contenedor botones
+        var botones = document.createElement('div');
+        botones.id = "botones";
+        document.getElementById("contenedor").append(botones);
+
+
+    }
+
+    function mostrar() {
+      var entrada = document.getElementById("listas").value;
+      var arrayLineas = leerDatos(entrada);
+      /*if (!vals) {
+        // ha habido errores, no hacer nada//Probar !arrayLineas.isEmpty
+        return;
+      }*/
+      //Cada vez que se presiona run, se limpia de divs el contendor "botones" para no append repes
+      document.getElementById("botones").innerHTML = "";
+
+      //numBotones=numLineas
+      for (i=0; i<arrayLineas.length; i++) {
+        var boton = document.createElement('div');
+        boton.innerHTML = i;
+        boton.id = i;
+        boton.addEventListener("click", dibujarGrafico.bind(null, arrayLineas[i]));
+        document.getElementById("botones").appendChild(boton);
+        console.log(arrayLineas[i]);
+      }
+
+      //Iniciar su contenido a vacío para guiar a la función q dibuja el gráfico
+      document.getElementById("barras").innerHTML = "";
+      //Simula un click para mostrar las barritas
+      //document.getElementById("botones").firstChild.click();//revisar
+    }
+
+    function leerDatos(entrada) {
+
+      //Separar datos
+      var arrayLineas = entrada.split("\n").map(function(linea){
+        return linea.split(",");
+      });//probar arrow
+
+      //Error 2
+      if (arrayLineas.length > 5) {
+        alert("mas de 5 lineas");
+        return false;
+      }
+
+      //Recorrer todas las lineas
+      var linea1 = arrayLineas[0];//Referencia//Probar debajo de error3, dentro del bucle
+      for (i=0; i<arrayLineas.length; i++) {
+        var linea = arrayLineas[i];
+
+        //Error 1
+        if (linea.length>6) {
+          alert("mas de 6 campos en linea "+(i+1));
+          return false;
+        }
+
+        //Error 3
+        if (linea.length !== linea1.length) {
+          alert("no hay los mismos campos en todas las lineas");
+          return false;
+        }
+
+        //Recorrer cada linea
+        for (j=0; j<linea.length; j++) {
+          var num = parseInt(linea[j]);
+          var esEntero = new RegExp("^\\d+$");
+
+          //Error 4
+          if (!esEntero.test(num)) {
+            alert("entrada no es entero: "+linea[j]);
+            return false;
+          }
+
+          //Error 5
+          if (num<1 || num>99) {
+            alert("datos fuera de rango: "+num);
+            return false;
+          }
+          arrayLineas[i][j]=num;
+        }
+      }
+
+      //Todo ha ido bien
+      return arrayLineas;
+    }
+
+//BARRASSSSSSSSSSSSSSSSS MOSTRARRRRRR
+    function dibujarGrafico(linea) {
+      if (document.getElementById("barras").innerHTML === "") {
+        for (num of linea) {
+          var div = document.createElement('div');
+          document.getElementById("barras").appendChild(div);
+        }
+        
+        /*linea.forEach(element => {
+          var lineaGrafico = document.createElement('div');
+          document.getElementById("barras").appendChild(lineaGrafico);
+          lineaGrafico.style.width = element / 99 * 100 + "%";
+          console.log(element);
+        });*/
+      }
+      for (i=0; i<document.getElementById("barras").childNodes.length; i++) {
+        document.getElementById("barras").childNodes.item(i).style.width = linea[i] / 99 * 100 + "%";
+      }
+    }
+    window.onload = cargar;
+    </script>
+</head>
+<body>
+</body>
+</html>
