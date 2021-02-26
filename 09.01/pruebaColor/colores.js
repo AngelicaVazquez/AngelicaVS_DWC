@@ -13603,22 +13603,53 @@ var map = L.map('covidMap', {
 // añadir estilos por zonas usando geoJSON
 // tb a cada zona un popup
 // tb personalizar con funciones(getColor) las zonas
+var colorInput = document.getElementById("color");
+var color = colorInput.value;
+
 
 function getColor(a){
   // personalizar los colores segun el pais:
-    if (a=='CHN' || a=='JPN' || a=='TWN' || a=='NPL' || a=='VNM' || a=='MYS' || a=='KHM' || a=='THA' || a=='LKA' || a=='KOR' || a=='AUS')
+    /*if (a=='CHN' || a=='JPN' || a=='TWN' || a=='NPL' || a=='VNM' || a=='MYS' || a=='KHM' || a=='THA' || a=='LKA' || a=='KOR' || a=='AUS')
     {
-      var colorInput = document.getElementById("color");
-      var color = colorInput.value;
         return color;
     }else{
         return '#FFFFFF';
-    }
+    }*/
+    /*if(a==L.geoJSON(countries,{function (feature) {
+      return feature.id;
+    }})){
+      return color;
+    }else{
+      return '#FFFFFF';
+    }*/
+
+    a.forEach(pais => {
+      if(pais==countries.features.id){
+        console.log(countries);
+        return color;
+      }else{
+        return '#FFFFFF';
+      }
+    });
+    var C = countries.features.id;
+    console.log(C);
   }
+var boton = document.getElementById("boton");
+
+
 L.geoJSON(countries, {
   style: function(feature) {
     return {
-      fillColor: getColor(feature.id), // color de fondo según el codigo del pais
+      //fillColor: getColor(feature.id), // color de fondo según el codigo del pais
+      fillColor: boton.addEventListener("click", function () {
+        var paises = [];
+        var checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
+        for (var i = 0; i < checkboxes.length; i++) {
+          paises.push(checkboxes[i].value)
+        }
+        //console.log(paises);
+        getColor(paises);
+      }),
       fillOpacity: 0.5, // opacidad del poligono
       stroke: true, // ver linea si
       color: "grey", // borde del poligono
